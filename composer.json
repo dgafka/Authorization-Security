@@ -1,0 +1,29 @@
+{
+    "name": "dgafka/annotation-security",
+    "description": "Take care of security concerns for you. Takes out security out of your domain logic and provides clean and easy API to do it.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dgafka",
+            "email": "dgafka.mail@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/expression-language": "2.7.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec" : "2.2.*",
+        "behat/behat" : "3.0.*",
+        "phpunit/phpunit" : "4.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dgafka\\AnnotationSecurity\\": "src"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

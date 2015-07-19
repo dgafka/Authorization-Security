@@ -1,0 +1,4 @@
+suites:
+  default:
+    namespace: Dgafka\AnnotationSecurity
+    psr4_prefix: Dgafka\AnnotationSecurity
