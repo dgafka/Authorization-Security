@@ -3,12 +3,12 @@
 namespace Dgafka\AnnotationSecurity\Domain\Resource;
 
 /**
- * Class Resource - Class
+ * Class Resource - Basic resource class.
  *
  * @package Dgafka\AnnotationSecurity\Domain\Resource
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
-final class Resource
+class Resource implements BaseResource
 {
 
 	/** @var  string */
