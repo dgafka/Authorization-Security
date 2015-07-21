@@ -1,11 +1,11 @@
 <?php
 
-namespace Dgafka\AnnotationSecurity\Domain\Expression;
+namespace Dgafka\Security\Domain\Expression;
 
 /**
  * Class Expression
  *
- * @package Dgafka\AnnotationSecurity\Domain\Expression
+ * @package Dgafka\Security\Domain\Expression
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 class Expression

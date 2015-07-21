@@ -8,12 +8,12 @@
 class PermissionTest extends PHPUnit_Framework_TestCase
 {
 
-	/** @var  \Dgafka\AnnotationSecurity\Domain\User\Lattice\Permission */
+	/** @var  \Dgafka\Security\Domain\User\Lattice\Permission */
 	private $permission;
 
 	public function setUp()
 	{
-		$this->permission = new \Dgafka\AnnotationSecurity\Domain\User\Lattice\Permission(10);
+		$this->permission = new \Dgafka\Security\Domain\User\Lattice\Permission(10);
 	}
 
 	public function testReturnPermissionLevel()
@@ -26,7 +26,7 @@ class PermissionTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testExceptionWhenStringPassedAsLevel()
 	{
-		new \Dgafka\AnnotationSecurity\Domain\User\Lattice\Permission('abc');
+		new \Dgafka\Security\Domain\User\Lattice\Permission('abc');
 	}
 
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Dgafka\AnnotationSecurity\Domain\User;
+namespace Dgafka\Security\Domain\User;
 
 /**
  * Class User - Currently logged user in the system
  * All properties, that need to be used in access control need to be public
  *
- * @package Dgafka\AnnotationSecurity\User
+ * @package Dgafka\Security\User
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 abstract class User

@@ -1,11 +1,11 @@
 <?php
 
-namespace Dgafka\AnnotationSecurity\Domain\Resource;
+namespace Dgafka\Security\Domain\Resource;
 
 /**
  * Interface BaseResource - Base Resource class for extending ability.
  *
- * @package Dgafka\AnnotationSecurity\Domain\Resource
+ * @package Dgafka\Security\Domain\Resource
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 interface BaseResource

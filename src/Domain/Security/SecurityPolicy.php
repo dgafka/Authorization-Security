@@ -1,14 +1,14 @@
 <?php
 
-namespace Dgafka\AnnotationSecurity\Domain\Security;
+namespace Dgafka\Security\Domain\Security;
 
-use Dgafka\AnnotationSecurity\Domain\Resource\BaseResource;
-use Dgafka\AnnotationSecurity\Domain\User\User;
+use Dgafka\Security\Domain\Resource\BaseResource;
+use Dgafka\Security\Domain\User\User;
 
 /**
  * Interface Policy - Class that describes extra combinations, that need to evaluated true to authorize user
  *
- * @package Dgafka\AnnotationSecurity\Domain\Security
+ * @package Dgafka\Security\Domain\Security
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 interface SecurityPolicy

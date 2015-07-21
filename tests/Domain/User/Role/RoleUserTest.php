@@ -8,14 +8,14 @@
 class RoleUserTest extends PHPUnit_Framework_TestCase
 {
 
-	/** @var  \Dgafka\AnnotationSecurity\Domain\User\Role\RoleUser */
+	/** @var  \Dgafka\Security\Domain\User\Role\RoleUser */
 	private $roleUser;
 
 	public function setUp()
 	{
-		$roles = new \Dgafka\AnnotationSecurity\Domain\User\Role\Roles([new \Dgafka\AnnotationSecurity\Domain\User\Role\Role('admin')]);
+		$roles = new \Dgafka\Security\Domain\User\Role\Roles([new \Dgafka\Security\Domain\User\Role\Role('admin')]);
 
-		$this->roleUser = new \Dgafka\AnnotationSecurity\Domain\User\Role\RoleUser('identity', $roles);
+		$this->roleUser = new \Dgafka\Security\Domain\User\Role\RoleUser('identity', $roles);
 	}
 
 	public function testHasRole()

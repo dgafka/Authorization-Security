@@ -1,11 +1,11 @@
 <?php
 
-namespace Dgafka\AnnotationSecurity\Domain\Resource;
+namespace Dgafka\Security\Domain\Resource;
 
 /**
  * Class Resource - Basic resource class.
  *
- * @package Dgafka\AnnotationSecurity\Domain\Resource
+ * @package Dgafka\Security\Domain\Resource
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 class Resource implements BaseResource

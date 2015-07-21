@@ -1,11 +1,11 @@
 <?php
 
-namespace Dgafka\AnnotationSecurity\Domain\User\Role;
+namespace Dgafka\Security\Domain\User\Role;
 
 /**
  * Class Roles - Describes user roles
  *
- * @package Dgafka\AnnotationSecurity\Domain\User\Role
+ * @package Dgafka\Security\Domain\User\Role
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 final class Roles

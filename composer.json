@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dgafka\\AnnotationSecurity\\": "src"
+            "Dgafka\\Security\\": "src"
         }
     },
     "config": {

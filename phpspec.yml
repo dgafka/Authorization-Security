@@ -1,5 +1,5 @@
 suites:
   default:
-    namespace: Dgafka\AnnotationSecurity
-    psr4_prefix: Dgafka\AnnotationSecurity
+    namespace: Dgafka\Security
+    psr4_prefix: Dgafka\Security
     spec_path: %paths.config%/tests

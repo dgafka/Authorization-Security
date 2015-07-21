@@ -1,6 +1,6 @@
 <?php
 
-namespace Dgafka\AnnotationSecurity\Domain\Security;
+namespace Dgafka\Security\Domain\Security;
 
 
 class SecurityAccessDenied extends \Exception

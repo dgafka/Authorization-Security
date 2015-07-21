@@ -8,12 +8,12 @@
 class RolesTest extends PHPUnit_Framework_TestCase
 {
 
-	/** @var  \Dgafka\AnnotationSecurity\Domain\User\Role\Roles */
+	/** @var  \Dgafka\Security\Domain\User\Role\Roles */
 	private $roles;
 
 	public function setUp()
 	{
-		$this->roles      = new \Dgafka\AnnotationSecurity\Domain\User\Role\Roles([new \Dgafka\AnnotationSecurity\Domain\User\Role\Role('admin'), new \Dgafka\AnnotationSecurity\Domain\User\Role\Role('moderator')]);
+		$this->roles      = new \Dgafka\Security\Domain\User\Role\Roles([new \Dgafka\Security\Domain\User\Role\Role('admin'), new \Dgafka\Security\Domain\User\Role\Role('moderator')]);
 	}
 
 
