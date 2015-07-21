@@ -9,7 +9,7 @@ namespace Dgafka\Security\Domain\Expression;
  * @package Dgafka\Security\Domain\Expression
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
-abstract class ExpressionReader
+interface ExpressionReader
 {
 
 	/**
@@ -20,6 +20,6 @@ abstract class ExpressionReader
 	 *
 	 * @return bool
 	 */
-	public abstract function evaluate(Expression $expression, array $data = array());
+	public function evaluate(Expression $expression, array $data = array());
 
 }
