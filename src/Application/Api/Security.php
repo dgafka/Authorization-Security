@@ -6,6 +6,8 @@ use Dgafka\Security\Application\Helper\DIContainer;
 use Dgafka\Security\Application\Helper\UserFactory;
 use Dgafka\Security\Application\Helper\ResourceFactory;
 use Dgafka\Security\Domain\Expression\Expression;
+use Dgafka\Security\Domain\Expression\ExpressionFunction;
+use Dgafka\Security\Domain\Expression\ExpressionReader;
 use Dgafka\Security\Domain\Security\SecurityType;
 
 /**
@@ -17,7 +19,7 @@ use Dgafka\Security\Domain\Security\SecurityType;
 class Security
 {
 
-	/** @var DIContainer  */
+	/** @var DIContainer */
 	private $container;
 
 	/**
@@ -41,23 +43,23 @@ class Security
 	{
 		/** @var UserFactory $userFactory */
 		$userFactory = $this->container->getUserFactory($userFactory);
-		$user        = $userFactory->create();
+		$user = $userFactory->create();
 
 		/** @var ResourceFactory $resourceFactory */
-		if(!is_null($resourceFactory)) {
+		if (!is_null($resourceFactory)) {
 			$resourceFactory = $this->container->getResourceFactory($resourceFactory);
-			$resource        = $resourceFactory->create();
+			$resource = $resourceFactory->create();
 		}
 
 		/** @var SecurityType $securityType */
-		$securityType    = $this->container->getSecurityType($securityType);
+		$securityType = $this->container->getSecurityType($securityType);
 
 		$policiesList = [];
-		foreach($policies as $policy) {
+		foreach ($policies as $policy) {
 			$policiesList[] = $this->container->getSecurityPolicy($policy);
 		}
 
-		$expression  = new Expression($expression);
+		$expression = new Expression($expression);
 		$securityType->execute($expression, $user, (isset($resource) ? $resource : null), $policiesList);
 
 	}

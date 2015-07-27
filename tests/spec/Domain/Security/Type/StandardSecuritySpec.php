@@ -27,7 +27,7 @@ class StandardSecuritySpec extends ObjectBehavior
     public function let(ExpressionReader $expressionReader)
     {
         $this->expressionReader = $expressionReader;
-        $this->beConstructedWith($expressionReader);
+        $this->setExpressionReader($expressionReader);
     }
 
     function it_is_initializable()

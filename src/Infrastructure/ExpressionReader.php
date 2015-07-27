@@ -3,6 +3,7 @@
 namespace Dgafka\Security\Infrastructure;
 
 use Dgafka\Security\Domain\Expression\Expression;
+use Dgafka\Security\Domain\Expression\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
@@ -17,9 +18,9 @@ class ExpressionReader implements \Dgafka\Security\Domain\Expression\ExpressionR
 	/** @var  ExpressionLanguage */
 	private $expressionReader;
 
-	public function __construct()
+	public function __construct(ExpressionLanguage $expressionLanguage)
 	{
-		$this->expressionReader = new ExpressionLanguage();
+		$this->expressionReader = $expressionLanguage;
 	}
 
 	/**
@@ -35,5 +36,23 @@ class ExpressionReader implements \Dgafka\Security\Domain\Expression\ExpressionR
 		return $this->expressionReader->evaluate($expression->expression(), $data);
 	}
 
+	/**
+	 * Registers new function to expression language
+	 *
+	 * @param ExpressionFunction $expressionFunction
+	 *
+	 * @return void
+	 */
+	public function registerFunction(ExpressionFunction $expressionFunction)
+	{
+		$functionToCall = $expressionFunction->expressionFunction();
+
+		$this->expressionReader->register($expressionFunction->name(), null, function() use($functionToCall) {
+			$arguments = func_get_args();
+			array_shift($arguments);
+
+			return $functionToCall($arguments);
+		});
+	}
 
 }

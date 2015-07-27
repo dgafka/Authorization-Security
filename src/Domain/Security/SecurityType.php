@@ -3,6 +3,7 @@
 namespace Dgafka\Security\Domain\Security;
 
 use Dgafka\Security\Domain\Expression\Expression;
+use Dgafka\Security\Domain\Expression\ExpressionReader;
 use Dgafka\Security\Domain\Resource\BaseResource;
 use Dgafka\Security\Domain\User\User;
 
@@ -13,8 +14,11 @@ use Dgafka\Security\Domain\User\User;
  * @package Dgafka\Security\Domain\Security
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
-interface SecurityType
+abstract class SecurityType
 {
+
+	/** @var  ExpressionReader */
+	protected $expressionReader;
 
 	/**
 	 * Executes security check, which should evaluate, if user is authorized
@@ -28,6 +32,10 @@ interface SecurityType
 	 * @return bool
 	 * @throws SecurityAccessDenied
 	 */
-	public function execute(Expression $expression, User $user, BaseResource $resource = null, array $policies = array());
+	public abstract function execute(Expression $expression, User $user, BaseResource $resource = null, array $policies = array());
+
+	final public function setExpressionReader(ExpressionReader $expressionReader) {
+		$this->expressionReader = $expressionReader;
+	}
 
 }

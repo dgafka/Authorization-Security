@@ -6,6 +6,8 @@ use Dgafka\Security\Application\Api\Security;
 use Dgafka\Security\Application\Helper\DIContainer;
 use Dgafka\Security\Application\Helper\ResourceFactory;
 use Dgafka\Security\Application\Helper\UserFactory;
+use Dgafka\Security\Domain\Expression\ExpressionFunction;
+use Dgafka\Security\Domain\Expression\ExpressionReader;
 use Dgafka\Security\Domain\Resource\BaseResource;
 use Dgafka\Security\Domain\Security\SecurityPolicy;
 use Dgafka\Security\Domain\Security\SecurityType;
@@ -78,6 +80,5 @@ class SecuritySpec extends ObjectBehavior
 
         $this->authorize('standard_security', 'user.id > 5', 'simple_user_factory', null, ['isLocalPolicy']);
     }
-
 
 }

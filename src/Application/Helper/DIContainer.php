@@ -18,6 +18,14 @@ interface DIContainer
 	/**
 	 * @param $name
 	 *
+	 * @return object
+	 * @throws DependencyException
+	 */
+	public function get($name);
+
+	/**
+	 * @param $name
+	 *
 	 * @return SecurityType
 	 * @throws DependencyException
 	 */
@@ -46,6 +54,14 @@ interface DIContainer
 	 * @throws DependencyException
 	 */
 	public function getResourceFactory($name);
+
+	/**
+	 * @param string $name
+	 * @param object $object
+	 *
+	 * @return void
+	 */
+	public function register($name, $object);
 
 	/**
 	 * Registers new security concern

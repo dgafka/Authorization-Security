@@ -22,4 +22,13 @@ interface ExpressionReader
 	 */
 	public function evaluate(Expression $expression, array $data = array());
 
+	/**
+	 * Registers new function to expression language
+	 *
+	 * @param ExpressionFunction $expressionFunction
+	 *
+	 * @return void
+	 */
+	public function registerFunction(ExpressionFunction $expressionFunction);
+
 }

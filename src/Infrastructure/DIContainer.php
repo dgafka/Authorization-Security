@@ -28,13 +28,13 @@ class DIContainer implements \Dgafka\Security\Application\Helper\DIContainer
 	/** @var array  */
 	private $diKeys =
 		array(
-			'type'   => 'security_type_',
-			'policy' => 'security_policy_',
-			'user'   => 'user_factory_',
-			'resource' => 'resource_factory_'
+			'security'   => 'security_type_',
+			'policy'     => 'security_policy_',
+			'user'       => 'user_factory_',
+			'resource'   => 'resource_factory_'
 		);
 
-	private function __construct()
+	protected function __construct()
 	{
 		$this->container = new Container();
 	}
@@ -44,11 +44,26 @@ class DIContainer implements \Dgafka\Security\Application\Helper\DIContainer
 	 */
 	public static function getInstance()
 	{
-		if(!isset($instance)) {
+		if(!isset(self::$instance)) {
 			self::$instance = new self();
 		}
 
 		return self::$instance;
+	}
+
+	/**
+	 * @param string $name
+	 *
+	 * @return object
+	 * @throws DependencyException
+	 */
+	public function get($name)
+	{
+		if(!$this->container->offsetExists($name)) {
+			throw new DependencyException("Can't retrieve object with given {$name} key, because it doesn't exists");
+		}
+
+		return $this->container[$name];
 	}
 
 	/**
@@ -65,7 +80,11 @@ class DIContainer implements \Dgafka\Security\Application\Helper\DIContainer
 			throw new DependencyException("Can't retrieve security type {$name}, because it doesn't exists");
 		}
 
-		return $this->container[$key];
+		/** @var SecurityType $securityType */
+		$securityType = $this->container[$key];
+		$securityType->setExpressionReader($this->get('expressionReader'));
+
+		return $securityType;
 	}
 
 	/**
@@ -120,6 +139,21 @@ class DIContainer implements \Dgafka\Security\Application\Helper\DIContainer
 	}
 
 	/**
+	 * @param string $name
+	 * @param object $object
+	 *
+	 * @throws DependencyException
+	 */
+	public function register($name, $object)
+	{
+		if($this->container->offsetExists($name)) {
+			throw new DependencyException("Can't set object under {$name} key, because it's already taken");
+		}
+
+		$this->container[$name] = $object;
+	}
+
+	/**
 	 * Registers new security concern
 	 *
 	 * @param string  $name
@@ -170,7 +204,7 @@ class DIContainer implements \Dgafka\Security\Application\Helper\DIContainer
 	 */
 	public function registerUserFactory($name, Closure $userFactory)
 	{
-		$key = $this->diKeys['security'] . $name;
+		$key = $this->diKeys['user'] . $name;
 
 		if($this->container->offsetExists($key)) {
 			throw new DependencyException("Can't register user factory with {$name}, because it's already exists");
@@ -190,7 +224,7 @@ class DIContainer implements \Dgafka\Security\Application\Helper\DIContainer
 	 */
 	public function registerResourceFactory($name, Closure $resourceFactory)
 	{
-		$key = $this->diKeys['security'] . $name;
+		$key = $this->diKeys['resource'] . $name;
 
 		if($this->container->offsetExists($key)) {
 			throw new DependencyException("Can't register resource factory with {$name}, because it's already exists");

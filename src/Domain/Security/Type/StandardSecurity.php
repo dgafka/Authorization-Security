@@ -16,19 +16,8 @@ use Dgafka\Security\Domain\User\User;
  * @package Dgafka\Security\Domain\Security\Type
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
-class StandardSecurity implements SecurityType
+class StandardSecurity extends SecurityType
 {
-
-	/** @var  ExpressionReader */
-	private $expressionReader;
-
-	/**
-	 * @param ExpressionReader $expressionReader
-	 */
-	public function __construct(ExpressionReader $expressionReader)
-	{
-		$this->expressionReader = $expressionReader;
-	}
 
 	/**
 	 * @inheritdoc
