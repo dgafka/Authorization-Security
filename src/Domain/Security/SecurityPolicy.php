@@ -2,7 +2,7 @@
 
 namespace Dgafka\Security\Domain\Security;
 
-use Dgafka\Security\Domain\Resource\BaseResource;
+use Dgafka\Security\Domain\Resource\Resource;
 use Dgafka\Security\Domain\User\User;
 
 /**
@@ -19,10 +19,10 @@ interface SecurityPolicy
 	 * otherwise false
 	 *
 	 * @param User              $user
-	 * @param BaseResource|null $resource
+	 * @param \Dgafka\Security\Domain\Resource\Resource|null     $resource
 	 *
 	 * @return bool
 	 */
-	public function execute(User $user, BaseResource $resource = null);
+	public function execute(User $user, Resource $resource = null);
 
 }

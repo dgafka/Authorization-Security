@@ -5,6 +5,7 @@ namespace Dgafka\Security\Application\Api;
 use Dgafka\Security\Application\Helper\DIContainer;
 use Dgafka\Security\Application\Helper\UserFactory;
 use Dgafka\Security\Application\Helper\ResourceFactory;
+use Dgafka\Security\Domain\Expression\EmptyExpression;
 use Dgafka\Security\Domain\Expression\Expression;
 use Dgafka\Security\Domain\Expression\ExpressionFunction;
 use Dgafka\Security\Domain\Expression\ExpressionReader;
@@ -54,12 +55,12 @@ class Security
 		/** @var SecurityType $securityType */
 		$securityType = $this->container->getSecurityType($securityType);
 
-		$policiesList = [];
+		$policiesList = array();
 		foreach ($policies as $policy) {
 			$policiesList[] = $this->container->getSecurityPolicy($policy);
 		}
 
-		$expression = new Expression($expression);
+		$expression = $expression ? new Expression($expression) : new EmptyExpression();
 		$securityType->execute($expression, $user, (isset($resource) ? $resource : null), $policiesList);
 
 	}

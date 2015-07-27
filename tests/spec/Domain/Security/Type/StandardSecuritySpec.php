@@ -4,7 +4,7 @@ namespace spec\Dgafka\Security\Domain\Security\Type;
 
 use Dgafka\Security\Domain\Expression\Expression;
 use Dgafka\Security\Domain\Expression\ExpressionReader;
-use Dgafka\Security\Domain\Resource\BaseResource;
+use Dgafka\Security\Domain\Resource\Resource;
 use Dgafka\Security\Domain\Security\SecurityPolicy;
 use Dgafka\Security\Domain\Security\Type\StandardSecurity;
 use Dgafka\Security\Domain\User\User;
@@ -35,7 +35,7 @@ class StandardSecuritySpec extends ObjectBehavior
         $this->shouldHaveType('Dgafka\Security\Domain\Security\SecurityType');
     }
 
-    public function it_should_evaluate_true(Expression $expression, User $user, BaseResource $resource, SecurityPolicy $securityPolicy)
+    public function it_should_evaluate_true(Expression $expression, User $user, Resource $resource, SecurityPolicy $securityPolicy)
     {
         $this->expressionReader->evaluate($expression, [ 'user' => $user, 'resource' => $resource ])->shouldBeCalledTimes(2)->willReturn(true);
         $this->execute($expression, $user, $resource, []);
@@ -47,7 +47,7 @@ class StandardSecuritySpec extends ObjectBehavior
         $this->execute($expression, $user, $resource, [$securityPolicy]);
     }
 
-    public function it_should_throw_exception_if_evaluated_false(Expression $expression, User $user, BaseResource $resource, SecurityPolicy $securityPolicy)
+    public function it_should_throw_exception_if_evaluated_false(Expression $expression, User $user, Resource $resource, SecurityPolicy $securityPolicy)
     {
         $this->expressionReader->evaluate($expression, [ 'user' => $user, 'resource' => $resource ])->shouldBeCalled()->willReturn(false);
         $this->shouldThrow('Dgafka\Security\Domain\Security\SecurityAccessDenied')->during('execute', [$expression, $user, $resource, []]);

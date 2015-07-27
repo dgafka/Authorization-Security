@@ -13,12 +13,12 @@ class ResourceTest extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->resource = new \Dgafka\Security\Domain\Resource\Resource('identity', 'comment');
+		$this->resource = new \Dgafka\Security\Domain\Resource\StandardResource('identity', 'comment');
 	}
 
 	public function testTypeOfBaseResource()
 	{
-		$this->assertInstanceOf('Dgafka\Security\Domain\Resource\BaseResource', $this->resource);
+		$this->assertInstanceOf('Dgafka\Security\Domain\Resource\Resource', $this->resource);
 	}
 
 	public function testParametersItWasCreatedWith()

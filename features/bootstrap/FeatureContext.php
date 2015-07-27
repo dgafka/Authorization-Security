@@ -13,7 +13,10 @@ class FeatureContext implements Context, SnippetAcceptingContext
 {
 
     /** @var array  */
-    private $userRoles = [];
+    private $userRoles = array();
+
+    /** @var \Dgafka\Fixtures\IBAC\SimpleACL  */
+    private $userPermission;
 
     /** @var  string name of the security */
     private $securityName;
@@ -66,6 +69,19 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
+     * @Given users and permissions:
+     */
+    public function usersAndPermissions(TableNode $table)
+    {
+        $permission = array();
+        foreach($table->getColumnsHash() as $userInfo) {
+            $permission[$userInfo['user']] = explode(',', $userInfo['resource']);
+        }
+
+        $this->userPermission = new \Dgafka\Fixtures\IBAC\SimpleACL($permission);
+    }
+
+    /**
      * @Given :arg1 security
      */
     public function security($securityName)
@@ -89,6 +105,11 @@ class FeatureContext implements Context, SnippetAcceptingContext
                     return new \Dgafka\Security\Domain\Security\Type\StandardSecurity();
                 });
                 break;
+            case 'ibac':
+                $this->applicationCore->registerSecurityType('ibac', function(){
+                    return new \Dgafka\Fixtures\IBAC\IBACSecurity($this->userPermission);
+                });
+                break;
             default:
                 throw new \Exception("Operation not permitted");
         }
@@ -99,21 +120,39 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function isUserWithId($userID)
     {
-        $additional = $this->userRoles[$userID];
-
         switch($this->securityName) {
             case 'role':
+                $additional = $this->userRoles[$userID];
                 $this->applicationCore->registerUserFactory($this->securityName, function () use ($userID, $additional) {
                     return new \Dgafka\Fixtures\Factory\RoleUserFactory($userID, $additional);
                 });
                 break;
             case 'lattice':
+                $additional = $this->userRoles[$userID];
                 $this->applicationCore->registerUserFactory($this->securityName, function () use ($userID, $additional) {
                     return new \Dgafka\Fixtures\Factory\LatticeUserFactory($userID, $additional);
                 });
                 break;
+            case 'ibac':
+                $this->applicationCore->registerUserFactory($this->securityName, function () use ($userID) {
+                    return new \Dgafka\Fixtures\IBAC\IdentityUserFactory($userID);
+                });
+                break;
+            default:
+                throw new \Exception("Operation not permitted");
         }
     }
+
+    /**
+     * @Given is resource with id :resource
+     */
+    public function isResourceWithId($resource)
+    {
+        $this->applicationCore->registerResourceFactory($this->securityName, function() use ($resource) {
+            return new \Dgafka\Fixtures\IBAC\ResourceFactory($resource);
+        });
+    }
+
 
     /**
      * @When user check :expression
@@ -144,6 +183,23 @@ class FeatureContext implements Context, SnippetAcceptingContext
 
         try {
             $this->securityAPI->authorize($this->securityName, $expression, $this->securityName, null, $policies);
+            $this->securityCheckResult = 1;
+        }catch (\Dgafka\Security\Domain\Security\SecurityAccessDenied $e) {
+            $this->securityCheckResult = 0;
+        }
+    }
+
+    /**
+     * @When user tries to modify
+     */
+    public function userTriesToModify()
+    {
+        $this->applicationCore->initialize($this->container, new \Dgafka\Security\Infrastructure\ExpressionReader(new \Symfony\Component\ExpressionLanguage\ExpressionLanguage()), function(){
+            return new \Dgafka\Security\Domain\Security\Type\StandardSecurity();
+        });
+
+        try {
+            $this->securityAPI->authorize($this->securityName, null, $this->securityName, $this->securityName, array());
             $this->securityCheckResult = 1;
         }catch (\Dgafka\Security\Domain\Security\SecurityAccessDenied $e) {
             $this->securityCheckResult = 0;

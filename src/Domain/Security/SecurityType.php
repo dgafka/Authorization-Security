@@ -4,7 +4,7 @@ namespace Dgafka\Security\Domain\Security;
 
 use Dgafka\Security\Domain\Expression\Expression;
 use Dgafka\Security\Domain\Expression\ExpressionReader;
-use Dgafka\Security\Domain\Resource\BaseResource;
+use Dgafka\Security\Domain\Resource\Resource;
 use Dgafka\Security\Domain\User\User;
 
 /**
@@ -22,17 +22,17 @@ abstract class SecurityType
 
 	/**
 	 * Executes security check, which should evaluate, if user is authorized
-	 * otherwise it should throw SecurityAccessDenied Exception
+	 * if not it should throw SecurityAccessDenied Exception
 	 *
 	 * @param Expression                $expression
 	 * @param User                      $user
-	 * @param BaseResource|null         $resource
+	 * @param \Dgafka\Security\Domain\Resource\Resource|null         $resource
 	 * @param array|SecurityPolicy[]    $policies
 	 *
-	 * @return bool
+	 * @return void
 	 * @throws SecurityAccessDenied
 	 */
-	public abstract function execute(Expression $expression, User $user, BaseResource $resource = null, array $policies = array());
+	public abstract function execute(Expression $expression, User $user, Resource $resource = null, array $policies = array());
 
 	final public function setExpressionReader(ExpressionReader $expressionReader) {
 		$this->expressionReader = $expressionReader;

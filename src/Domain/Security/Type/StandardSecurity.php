@@ -3,8 +3,7 @@
 namespace Dgafka\Security\Domain\Security\Type;
 
 use Dgafka\Security\Domain\Expression\Expression;
-use Dgafka\Security\Domain\Expression\ExpressionReader;
-use Dgafka\Security\Domain\Resource\BaseResource;
+use Dgafka\Security\Domain\Resource\Resource;
 use Dgafka\Security\Domain\Security\SecurityAccessDenied;
 use Dgafka\Security\Domain\Security\SecurityPolicy;
 use Dgafka\Security\Domain\Security\SecurityType;
@@ -22,7 +21,7 @@ class StandardSecurity extends SecurityType
 	/**
 	 * @inheritdoc
 	 */
-	public function execute(Expression $expression, User $user, BaseResource $resource = null, array $policies = array())
+	public function execute(Expression $expression, User $user, Resource $resource = null, array $policies = array())
 	{
 		if(!$this->expressionReader->evaluate($expression, ['user' => $user, 'resource' => $resource])) {
 			throw new SecurityAccessDenied("User: {$user->id()} have no access to this resource.");
