@@ -3,10 +3,10 @@
 namespace Dgafka\Fixtures\Factory;
 
 
-use Dgafka\Security\Application\Helper\UserFactory;
-use Dgafka\Security\Domain\User\Lattice\LatticeUser;
-use Dgafka\Security\Domain\User\Lattice\Permission;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Application\Helper\UserFactory;
+use Dgafka\AuthorizationSecurity\Domain\User\Lattice\LatticeUser;
+use Dgafka\AuthorizationSecurity\Domain\User\Lattice\Permission;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Class LatticeUserFactory

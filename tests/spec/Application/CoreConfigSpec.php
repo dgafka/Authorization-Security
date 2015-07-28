@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Dgafka\Security\Application;
+namespace spec\Dgafka\AuthorizationSecurity\Application;
 
-use Dgafka\Security\Application\CoreConfig;
+use Dgafka\AuthorizationSecurity\Application\CoreConfig;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\visitor\vfsStreamStructureVisitor;
 use PhpSpec\ObjectBehavior;
@@ -11,7 +11,7 @@ use Prophecy\Argument;
 /**
  * Class CoreConfigSpec
  *
- * @package spec\Dgafka\Security\Application
+ * @package spec\Dgafka\AuthorizationSecurity\Application
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  * @mixin CoreConfig
  */

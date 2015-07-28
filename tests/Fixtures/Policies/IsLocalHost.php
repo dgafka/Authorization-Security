@@ -2,10 +2,10 @@
 
 namespace Dgafka\Fixtures\Policies;
 
-use Dgafka\Security\Domain\Resource\BaseResource;
-use Dgafka\Security\Domain\Resource\Resource;
-use Dgafka\Security\Domain\Security\SecurityPolicy;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Domain\Resource\BaseResource;
+use Dgafka\AuthorizationSecurity\Domain\Resource\Resource;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityPolicy;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Class IsLocalHost

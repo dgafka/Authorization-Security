@@ -1,12 +1,12 @@
 <?php
 
-namespace Dgafka\Security\Domain\User\Role;
-use Dgafka\Security\Domain\User\User;
+namespace Dgafka\AuthorizationSecurity\Domain\User\Role;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Class RoleUser - Role Based Access Control User
  *
- * @package Dgafka\Security\Domain\User\Role
+ * @package Dgafka\AuthorizationSecurity\Domain\User\Role
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 final class RoleUser extends User

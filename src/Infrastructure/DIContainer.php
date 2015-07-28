@@ -1,22 +1,22 @@
 <?php
 
-namespace Dgafka\Security\Infrastructure;
+namespace Dgafka\AuthorizationSecurity\Infrastructure;
 
 use Closure;
-use Dgafka\Security\Application\Helper\DependencyException;
-use Dgafka\Security\Application\Helper\ResourceFactory;
-use Dgafka\Security\Application\Helper\UserFactory;
-use Dgafka\Security\Domain\Security\SecurityPolicy;
-use Dgafka\Security\Domain\Security\SecurityType;
+use Dgafka\AuthorizationSecurity\Application\Helper\DependencyException;
+use Dgafka\AuthorizationSecurity\Application\Helper\ResourceFactory;
+use Dgafka\AuthorizationSecurity\Application\Helper\UserFactory;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityPolicy;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityType;
 use Pimple\Container;
 
 /**
  * Class DIContainer
  *
- * @package Dgafka\Security\Infrastructure
+ * @package Dgafka\AuthorizationSecurity\Infrastructure
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
-class DIContainer implements \Dgafka\Security\Application\Helper\DIContainer
+class DIContainer implements \Dgafka\AuthorizationSecurity\Application\Helper\DIContainer
 {
 
 	/** @var  Container */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dgafka\Security\Application\Helper;
+namespace Dgafka\AuthorizationSecurity\Application\Helper;
 
 final class DependencyException extends \Exception
 {

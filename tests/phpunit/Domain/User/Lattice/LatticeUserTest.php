@@ -8,28 +8,28 @@
 class LatticeUserTest extends PHPUnit_Framework_TestCase
 {
 
-	/** @var  \Dgafka\Security\Domain\User\Lattice\LatticeUser */
+	/** @var  \Dgafka\AuthorizationSecurity\Domain\User\Lattice\LatticeUser */
 	protected $latticeUser;
 
-	/** @var  \Dgafka\Security\Domain\User\Lattice\Permission */
+	/** @var  \Dgafka\AuthorizationSecurity\Domain\User\Lattice\Permission */
 	protected $permission;
 
 	public function setUp()
 	{
-		$this->permission = new \Dgafka\Security\Domain\User\Lattice\Permission(10);
-		$this->latticeUser = new \Dgafka\Security\Domain\User\Lattice\LatticeUser('someID', $this->permission);
+		$this->permission = new \Dgafka\AuthorizationSecurity\Domain\User\Lattice\Permission(10);
+		$this->latticeUser = new \Dgafka\AuthorizationSecurity\Domain\User\Lattice\LatticeUser('someID', $this->permission);
 	}
 
 	public function testInstanceOfUser()
 	{
-		$this->assertInstanceOf('\Dgafka\Security\Domain\User\User', $this->latticeUser);
+		$this->assertInstanceOf('\Dgafka\AuthorizationSecurity\Domain\User\User', $this->latticeUser);
 
 	}
 
 	public function testPermissionLevel()
 	{
 		$permission = $this->latticeUser->permission();
-		$this->assertInstanceOf('\Dgafka\Security\Domain\User\Lattice\Permission', $permission);
+		$this->assertInstanceOf('\Dgafka\AuthorizationSecurity\Domain\User\Lattice\Permission', $permission);
 		$this->assertEquals(10, $permission->level());
 	}
 

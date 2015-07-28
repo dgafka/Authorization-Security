@@ -1,11 +1,11 @@
 <?php
 
-namespace Dgafka\Security\Domain\User\Lattice;
+namespace Dgafka\AuthorizationSecurity\Domain\User\Lattice;
 
 /**
  * Class Permission - Permission level class
  *
- * @package Dgafka\Security\Domain\User
+ * @package Dgafka\AuthorizationSecurity\Domain\User
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 final class Permission

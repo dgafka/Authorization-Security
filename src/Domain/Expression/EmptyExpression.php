@@ -1,11 +1,11 @@
 <?php
 
-namespace Dgafka\Security\Domain\Expression;
+namespace Dgafka\AuthorizationSecurity\Domain\Expression;
 
 /**
  * Class EmptyExpression - Empty expression, that always evaluate true
  *
- * @package Dgafka\Security\Domain\Expression
+ * @package Dgafka\AuthorizationSecurity\Domain\Expression
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 class EmptyExpression extends Expression

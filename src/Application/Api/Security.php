@@ -1,20 +1,18 @@
 <?php
 
-namespace Dgafka\Security\Application\Api;
+namespace Dgafka\AuthorizationSecurity\Application\Api;
 
-use Dgafka\Security\Application\Helper\DIContainer;
-use Dgafka\Security\Application\Helper\UserFactory;
-use Dgafka\Security\Application\Helper\ResourceFactory;
-use Dgafka\Security\Domain\Expression\EmptyExpression;
-use Dgafka\Security\Domain\Expression\Expression;
-use Dgafka\Security\Domain\Expression\ExpressionFunction;
-use Dgafka\Security\Domain\Expression\ExpressionReader;
-use Dgafka\Security\Domain\Security\SecurityType;
+use Dgafka\AuthorizationSecurity\Application\Helper\DIContainer;
+use Dgafka\AuthorizationSecurity\Application\Helper\UserFactory;
+use Dgafka\AuthorizationSecurity\Application\Helper\ResourceFactory;
+use Dgafka\AuthorizationSecurity\Domain\Expression\EmptyExpression;
+use Dgafka\AuthorizationSecurity\Domain\Expression\Expression;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityType;
 
 /**
  * Class AnnotationSecurity - describes API for security
  *
- * @package Dgafka\Security\Domain\Application\Api
+ * @package Dgafka\AuthorizationSecurity\Domain\Application\Api
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 class Security

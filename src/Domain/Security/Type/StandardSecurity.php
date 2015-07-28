@@ -1,18 +1,18 @@
 <?php
 
-namespace Dgafka\Security\Domain\Security\Type;
+namespace Dgafka\AuthorizationSecurity\Domain\Security\Type;
 
-use Dgafka\Security\Domain\Expression\Expression;
-use Dgafka\Security\Domain\Resource\Resource;
-use Dgafka\Security\Domain\Security\SecurityAccessDenied;
-use Dgafka\Security\Domain\Security\SecurityPolicy;
-use Dgafka\Security\Domain\Security\SecurityType;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Domain\Expression\Expression;
+use Dgafka\AuthorizationSecurity\Domain\Resource\Resource;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityPolicy;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityType;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Class RoleBasedSecurity - Role Based Security control - Check, if user contains given role
  *
- * @package Dgafka\Security\Domain\Security\Type
+ * @package Dgafka\AuthorizationSecurity\Domain\Security\Type
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 class StandardSecurity extends SecurityType

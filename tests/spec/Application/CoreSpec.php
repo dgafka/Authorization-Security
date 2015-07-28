@@ -1,19 +1,19 @@
 <?php
 
-namespace spec\Dgafka\Security\Application;
+namespace spec\Dgafka\AuthorizationSecurity\Application;
 
-use Dgafka\Security\Application\Core;
-use Dgafka\Security\Application\CoreConfig;
-use Dgafka\Security\Application\Helper\DIContainer;
-use Dgafka\Security\Domain\Expression\ExpressionFunction;
-use Dgafka\Security\Domain\Expression\ExpressionReader;
+use Dgafka\AuthorizationSecurity\Application\Core;
+use Dgafka\AuthorizationSecurity\Application\CoreConfig;
+use Dgafka\AuthorizationSecurity\Application\Helper\DIContainer;
+use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionFunction;
+use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionReader;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
  * Class CoreSpec
  *
- * @package spec\Dgafka\Security\Application
+ * @package spec\Dgafka\AuthorizationSecurity\Application
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  * @mixin Core
  */
@@ -30,7 +30,7 @@ class CoreSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Dgafka\Security\Application\Core');
+        $this->shouldHaveType('Dgafka\AuthorizationSecurity\Application\Core');
     }
 
     public function it_should_return_config_object()

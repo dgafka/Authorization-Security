@@ -1,13 +1,13 @@
 <?php
 
-namespace Dgafka\Security\Application\Helper;
+namespace Dgafka\AuthorizationSecurity\Application\Helper;
 
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Interface UserFactory - Responsible for creating new user objects
  *
- * @package Dgafka\Security\Domain\Application\Helper
+ * @package Dgafka\AuthorizationSecurity\Domain\Application\Helper
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 interface UserFactory

@@ -1,13 +1,13 @@
 <?php
 
-namespace Dgafka\Security\Domain\User\Identity;
+namespace Dgafka\AuthorizationSecurity\Domain\User\Identity;
 
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Class IdentityUser - User for Identity Based Access Control
  *
- * @package Dgafka\Security\Domain\User
+ * @package Dgafka\AuthorizationSecurity\Domain\User
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 final class IdentityUser extends User

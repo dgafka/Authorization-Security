@@ -1,13 +1,13 @@
 <?php
 
-namespace Dgafka\Security\Domain\User\Lattice;
+namespace Dgafka\AuthorizationSecurity\Domain\User\Lattice;
 
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Class LatticeUser - Identity based access control user
  *
- * @package Dgafka\Security\Domain\User
+ * @package Dgafka\AuthorizationSecurity\Domain\User
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 final class LatticeUser extends User

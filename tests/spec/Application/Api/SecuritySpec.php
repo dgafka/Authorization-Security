@@ -1,25 +1,25 @@
 <?php
 
-namespace spec\Dgafka\Security\Application\Api;
+namespace spec\Dgafka\AuthorizationSecurity\Application\Api;
 
-use Dgafka\Security\Application\Api\Security;
-use Dgafka\Security\Application\Helper\DIContainer;
-use Dgafka\Security\Application\Helper\ResourceFactory;
-use Dgafka\Security\Application\Helper\UserFactory;
-use Dgafka\Security\Domain\Expression\ExpressionFunction;
-use Dgafka\Security\Domain\Expression\ExpressionReader;
-use Dgafka\Security\Domain\Resource\BaseResource;
-use Dgafka\Security\Domain\Resource\Resource;
-use Dgafka\Security\Domain\Security\SecurityPolicy;
-use Dgafka\Security\Domain\Security\SecurityType;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Application\Api\Security;
+use Dgafka\AuthorizationSecurity\Application\Helper\DIContainer;
+use Dgafka\AuthorizationSecurity\Application\Helper\ResourceFactory;
+use Dgafka\AuthorizationSecurity\Application\Helper\UserFactory;
+use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionFunction;
+use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionReader;
+use Dgafka\AuthorizationSecurity\Domain\Resource\BaseResource;
+use Dgafka\AuthorizationSecurity\Domain\Resource\Resource;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityPolicy;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityType;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
  * Class SecuritySpec
  *
- * @package spec\Dgafka\Security\Application\Api
+ * @package spec\Dgafka\AuthorizationSecurity\Application\Api
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  * @mixin Security
  */
@@ -37,7 +37,7 @@ class SecuritySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Dgafka\Security\Application\Api\Security');
+        $this->shouldHaveType('Dgafka\AuthorizationSecurity\Application\Api\Security');
     }
 
     public function it_should_run_security_without_policies(SecurityType $security, UserFactory $userFactory, User $user, Resource $resource, ResourceFactory $resourceFactory)
@@ -49,7 +49,7 @@ class SecuritySpec extends ObjectBehavior
         $userFactory->create()->willReturn($user);
         $resourceFactory->create()->willReturn($resource);
 
-        $security->execute(Argument::type('Dgafka\Security\Domain\Expression\Expression'),  $user, $resource, array())->shouldBeCalledTimes(1);
+        $security->execute(Argument::type('Dgafka\AuthorizationSecurity\Domain\Expression\Expression'),  $user, $resource, array())->shouldBeCalledTimes(1);
 
         $this->authorize('standard_security', 'user.id > 5', 'simple_user_factory', 'simple_resource_factory');
     }
@@ -64,7 +64,7 @@ class SecuritySpec extends ObjectBehavior
         $userFactory->create()->willReturn($user);
         $resourceFactory->create()->willReturn($resource);
 
-        $security->execute(Argument::type('Dgafka\Security\Domain\Expression\Expression'),  $user, $resource, array($securityPolicy))->shouldBeCalledTimes(1);
+        $security->execute(Argument::type('Dgafka\AuthorizationSecurity\Domain\Expression\Expression'),  $user, $resource, array($securityPolicy))->shouldBeCalledTimes(1);
 
         $this->authorize('standard_security', 'user.id > 5', 'simple_user_factory', 'simple_resource_factory', array('isLocalPolicy'));
     }
@@ -77,7 +77,7 @@ class SecuritySpec extends ObjectBehavior
 
         $userFactory->create()->willReturn($user);
 
-        $security->execute(Argument::type('Dgafka\Security\Domain\Expression\Expression'),  $user, null, array($securityPolicy))->shouldBeCalledTimes(1);
+        $security->execute(Argument::type('Dgafka\AuthorizationSecurity\Domain\Expression\Expression'),  $user, null, array($securityPolicy))->shouldBeCalledTimes(1);
 
         $this->authorize('standard_security', 'user.id > 5', 'simple_user_factory', null, array('isLocalPolicy'));
     }
@@ -89,7 +89,7 @@ class SecuritySpec extends ObjectBehavior
 
         $userFactory->create()->willReturn($user);
 
-        $security->execute(Argument::type('Dgafka\Security\Domain\Expression\EmptyExpression'),  $user, null, array())->shouldBeCalledTimes(1);
+        $security->execute(Argument::type('Dgafka\AuthorizationSecurity\Domain\Expression\EmptyExpression'),  $user, null, array())->shouldBeCalledTimes(1);
 
         $this->authorize('standard_security', null, 'simple_user_factory', null);
     }

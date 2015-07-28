@@ -1,18 +1,21 @@
 {
-    "name": "dgafka/annotation-security",
-    "description": "Take care of security concerns for you. Takes out security out of your domain logic and provides clean and easy API to do it.",
+    "name": "dgafka/authorization-security",
     "type": "library",
+    "description": "Take care of authorization concerns for you. Takes out security out of your domain logic and provides clean and easy API to do it.",
+    "keywords": ["authorization", "security", "annotations", "secure", "expression"],
     "license": "MIT",
     "authors": [
         {
-            "name": "dgafka",
+            "name": "Dariusz Gafka",
             "email": "dgafka.mail@gmail.com"
         }
     ],
     "minimum-stability": "dev",
     "require": {
+        "php": ">=5.4.0",
         "symfony/expression-language": "2.7.*",
-        "pimple/pimple": "3.0.*"
+        "pimple/pimple": "3.0.*",
+        "goaop/framework": "0.6.1"
     },
     "require-dev": {
         "phpspec/phpspec" : "2.2.*",
@@ -22,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dgafka\\Security\\": "src"
+            "Dgafka\\AuthorizationSecurity\\": "src"
         }
     },
     "autoload-dev": {

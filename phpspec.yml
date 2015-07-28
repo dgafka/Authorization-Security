@@ -1,5 +1,5 @@
 suites:
   default:
-    namespace: Dgafka\Security
-    psr4_prefix: Dgafka\Security
+    namespace: Dgafka\AuthorizationSecurity
+    psr4_prefix: Dgafka\AuthorizationSecurity
     spec_path: %paths.config%/tests

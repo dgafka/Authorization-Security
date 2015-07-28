@@ -1,11 +1,11 @@
 <?php
 
-namespace Dgafka\Security\Domain\Resource;
+namespace Dgafka\AuthorizationSecurity\Domain\Resource;
 
 /**
  * Class Resource - Basic resource class.
  *
- * @package Dgafka\Security\Domain\Resource
+ * @package Dgafka\AuthorizationSecurity\Domain\Resource
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 class StandardResource implements Resource

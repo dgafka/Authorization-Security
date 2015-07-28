@@ -3,7 +3,7 @@
 namespace Dgafka\Fixtures\ExpressionFunction;
 
 
-use Dgafka\Security\Domain\Expression\ExpressionFunction;
+use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionFunction;
 
 class IsStringLower implements ExpressionFunction
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Dgafka\Security\Infrastructure;
+namespace Dgafka\AuthorizationSecurity\Infrastructure;
 
-use Dgafka\Security\Domain\Expression\Expression;
-use Dgafka\Security\Domain\Expression\ExpressionFunction;
+use Dgafka\AuthorizationSecurity\Domain\Expression\Expression;
+use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
  * Class ExpressionReader
  *
- * @package Dgafka\Security\Infrastructure
+ * @package Dgafka\AuthorizationSecurity\Infrastructure
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
-class ExpressionReader implements \Dgafka\Security\Domain\Expression\ExpressionReader
+class ExpressionReader implements \Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionReader
 {
 
 	/** @var  ExpressionLanguage */

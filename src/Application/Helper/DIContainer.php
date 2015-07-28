@@ -1,15 +1,15 @@
 <?php
 
-namespace Dgafka\Security\Application\Helper;
+namespace Dgafka\AuthorizationSecurity\Application\Helper;
 
-use Dgafka\Security\Domain\Security\SecurityPolicy;
-use Dgafka\Security\Domain\Security\SecurityType;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityPolicy;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityType;
 use \Closure;
 
 /**
  * Interface DIContainer - Application internal DI container
  *
- * @package Dgafka\Security\Domain\Application\Helper
+ * @package Dgafka\AuthorizationSecurity\Domain\Application\Helper
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 interface DIContainer

@@ -1,20 +1,20 @@
 <?php
 
-namespace spec\Dgafka\Security\Domain\Security\Type;
+namespace spec\Dgafka\AuthorizationSecurity\Domain\Security\Type;
 
-use Dgafka\Security\Domain\Expression\Expression;
-use Dgafka\Security\Domain\Expression\ExpressionReader;
-use Dgafka\Security\Domain\Resource\Resource;
-use Dgafka\Security\Domain\Security\SecurityPolicy;
-use Dgafka\Security\Domain\Security\Type\StandardSecurity;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Domain\Expression\Expression;
+use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionReader;
+use Dgafka\AuthorizationSecurity\Domain\Resource\Resource;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityPolicy;
+use Dgafka\AuthorizationSecurity\Domain\Security\Type\StandardSecurity;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
  * Class RoleBasedSecuritySpec
  *
- * @package spec\Dgafka\Security\Domain\Security\Type
+ * @package spec\Dgafka\AuthorizationSecurity\Domain\Security\Type
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  * @mixin StandardSecurity
  */
@@ -32,7 +32,7 @@ class StandardSecuritySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Dgafka\Security\Domain\Security\SecurityType');
+        $this->shouldHaveType('Dgafka\AuthorizationSecurity\Domain\Security\SecurityType');
     }
 
     public function it_should_evaluate_true(Expression $expression, User $user, Resource $resource, SecurityPolicy $securityPolicy)
@@ -50,11 +50,11 @@ class StandardSecuritySpec extends ObjectBehavior
     public function it_should_throw_exception_if_evaluated_false(Expression $expression, User $user, Resource $resource, SecurityPolicy $securityPolicy)
     {
         $this->expressionReader->evaluate($expression, [ 'user' => $user, 'resource' => $resource ])->shouldBeCalled()->willReturn(false);
-        $this->shouldThrow('Dgafka\Security\Domain\Security\SecurityAccessDenied')->during('execute', [$expression, $user, $resource, []]);
+        $this->shouldThrow('Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied')->during('execute', [$expression, $user, $resource, []]);
 
         $this->expressionReader->evaluate($expression, [ 'user' => $user, 'resource' => $resource ])->shouldBeCalled()->willReturn(true);
         $securityPolicy->execute($user, $resource)->willReturn(false);
-        $this->shouldThrow('Dgafka\Security\Domain\Security\SecurityAccessDenied')->during('execute', [$expression, $user, $resource, [$securityPolicy]]);
+        $this->shouldThrow('Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied')->during('execute', [$expression, $user, $resource, [$securityPolicy]]);
     }
 
 }

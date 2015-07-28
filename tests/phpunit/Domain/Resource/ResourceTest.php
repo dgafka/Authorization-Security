@@ -8,17 +8,17 @@
 class ResourceTest extends PHPUnit_Framework_TestCase
 {
 
-	/** @var  \Dgafka\Security\Domain\Resource\Resource */
+	/** @var  \Dgafka\AuthorizationSecurity\Domain\Resource\Resource */
 	private $resource;
 
 	public function setUp()
 	{
-		$this->resource = new \Dgafka\Security\Domain\Resource\StandardResource('identity', 'comment');
+		$this->resource = new \Dgafka\AuthorizationSecurity\Domain\Resource\StandardResource('identity', 'comment');
 	}
 
 	public function testTypeOfBaseResource()
 	{
-		$this->assertInstanceOf('Dgafka\Security\Domain\Resource\Resource', $this->resource);
+		$this->assertInstanceOf('Dgafka\AuthorizationSecurity\Domain\Resource\Resource', $this->resource);
 	}
 
 	public function testParametersItWasCreatedWith()

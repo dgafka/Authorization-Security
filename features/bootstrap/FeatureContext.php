@@ -21,13 +21,13 @@ class FeatureContext implements Context, SnippetAcceptingContext
     /** @var  string name of the security */
     private $securityName;
 
-    /** @var  \Dgafka\Security\Application\Api\Security */
+    /** @var  \Dgafka\AuthorizationSecurity\Application\Api\Security */
     private $securityAPI;
 
-    /** @var  \Dgafka\Security\Application\Core */
+    /** @var  \Dgafka\AuthorizationSecurity\Application\Core */
     private $applicationCore;
 
-    /** @var  \Dgafka\Security\Application\Helper\DIContainer */
+    /** @var  \Dgafka\AuthorizationSecurity\Application\Helper\DIContainer */
     private $container;
 
     /** @var  int */
@@ -91,18 +91,18 @@ class FeatureContext implements Context, SnippetAcceptingContext
         $this->container        = \Dgafka\Fixtures\Application\DIContainer::getInstance();
 
 
-        $this->applicationCore = new \Dgafka\Security\Application\Core(new \Dgafka\Security\Application\CoreConfig(array(\org\bovigo\vfs\vfsStream::url('home')), \org\bovigo\vfs\vfsStream::url('home/cache'), true));
-        $this->securityAPI  = new \Dgafka\Security\Application\Api\Security($this->container);
+        $this->applicationCore = new \Dgafka\AuthorizationSecurity\Application\Core(new \Dgafka\AuthorizationSecurity\Application\CoreConfig(array(\org\bovigo\vfs\vfsStream::url('home')), \org\bovigo\vfs\vfsStream::url('home/cache'), true));
+        $this->securityAPI  = new \Dgafka\AuthorizationSecurity\Application\Api\Security($this->container);
 
         switch($securityName) {
             case 'role':
                 $this->applicationCore->registerSecurityType('role', function() {
-                    return new \Dgafka\Security\Domain\Security\Type\StandardSecurity();
+                    return new \Dgafka\AuthorizationSecurity\Domain\Security\Type\StandardSecurity();
                 });
                 break;
             case 'lattice':
                 $this->applicationCore->registerSecurityType('lattice', function() {
-                    return new \Dgafka\Security\Domain\Security\Type\StandardSecurity();
+                    return new \Dgafka\AuthorizationSecurity\Domain\Security\Type\StandardSecurity();
                 });
                 break;
             case 'ibac':
@@ -159,14 +159,14 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function userCheck($expression)
     {
-        $this->applicationCore->initialize($this->container, new \Dgafka\Security\Infrastructure\ExpressionReader(new \Symfony\Component\ExpressionLanguage\ExpressionLanguage()), function(){
-            return new \Dgafka\Security\Domain\Security\Type\StandardSecurity();
+        $this->applicationCore->initialize($this->container, new \Dgafka\AuthorizationSecurity\Infrastructure\ExpressionReader(new \Symfony\Component\ExpressionLanguage\ExpressionLanguage()), function(){
+            return new \Dgafka\AuthorizationSecurity\Domain\Security\Type\StandardSecurity();
         });
 
         try {
             $this->securityAPI->authorize($this->securityName, $expression, $this->securityName);
             $this->securityCheckResult = 1;
-        }catch (\Dgafka\Security\Domain\Security\SecurityAccessDenied $e) {
+        }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
             $this->securityCheckResult = 0;
         }
     }
@@ -176,15 +176,15 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function userCheckAnd($expression, $policies)
     {
-        $this->applicationCore->initialize($this->container, new \Dgafka\Security\Infrastructure\ExpressionReader(new \Symfony\Component\ExpressionLanguage\ExpressionLanguage()), function(){
-            return new \Dgafka\Security\Domain\Security\Type\StandardSecurity();
+        $this->applicationCore->initialize($this->container, new \Dgafka\AuthorizationSecurity\Infrastructure\ExpressionReader(new \Symfony\Component\ExpressionLanguage\ExpressionLanguage()), function(){
+            return new \Dgafka\AuthorizationSecurity\Domain\Security\Type\StandardSecurity();
         });
         $policies = explode(',', $policies);
 
         try {
             $this->securityAPI->authorize($this->securityName, $expression, $this->securityName, null, $policies);
             $this->securityCheckResult = 1;
-        }catch (\Dgafka\Security\Domain\Security\SecurityAccessDenied $e) {
+        }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
             $this->securityCheckResult = 0;
         }
     }
@@ -194,14 +194,14 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function userTriesToModify()
     {
-        $this->applicationCore->initialize($this->container, new \Dgafka\Security\Infrastructure\ExpressionReader(new \Symfony\Component\ExpressionLanguage\ExpressionLanguage()), function(){
-            return new \Dgafka\Security\Domain\Security\Type\StandardSecurity();
+        $this->applicationCore->initialize($this->container, new \Dgafka\AuthorizationSecurity\Infrastructure\ExpressionReader(new \Symfony\Component\ExpressionLanguage\ExpressionLanguage()), function(){
+            return new \Dgafka\AuthorizationSecurity\Domain\Security\Type\StandardSecurity();
         });
 
         try {
             $this->securityAPI->authorize($this->securityName, null, $this->securityName, $this->securityName, array());
             $this->securityCheckResult = 1;
-        }catch (\Dgafka\Security\Domain\Security\SecurityAccessDenied $e) {
+        }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
             $this->securityCheckResult = 0;
         }
     }

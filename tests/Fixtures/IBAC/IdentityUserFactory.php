@@ -2,9 +2,9 @@
 
 namespace Dgafka\Fixtures\IBAC;
 
-use Dgafka\Security\Application\Helper\UserFactory;
-use Dgafka\Security\Domain\User\Identity\IdentityUser;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Application\Helper\UserFactory;
+use Dgafka\AuthorizationSecurity\Domain\User\Identity\IdentityUser;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 class IdentityUserFactory implements UserFactory
 {

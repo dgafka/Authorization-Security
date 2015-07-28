@@ -1,14 +1,14 @@
 <?php
 
-namespace Dgafka\Security\Domain\Security;
+namespace Dgafka\AuthorizationSecurity\Domain\Security;
 
-use Dgafka\Security\Domain\Resource\Resource;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Domain\Resource\Resource;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Interface Policy - Class that describes extra combinations, that need to evaluated true to authorize user
  *
- * @package Dgafka\Security\Domain\Security
+ * @package Dgafka\AuthorizationSecurity\Domain\Security
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 interface SecurityPolicy
@@ -19,7 +19,7 @@ interface SecurityPolicy
 	 * otherwise false
 	 *
 	 * @param User              $user
-	 * @param \Dgafka\Security\Domain\Resource\Resource|null     $resource
+	 * @param \Dgafka\AuthorizationSecurity\Domain\Resource\Resource|null     $resource
 	 *
 	 * @return bool
 	 */

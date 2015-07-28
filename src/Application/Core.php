@@ -1,16 +1,16 @@
 <?php
 
-namespace Dgafka\Security\Application;
+namespace Dgafka\AuthorizationSecurity\Application;
 
-use Dgafka\Security\Application\Helper\DIContainer;
-use Dgafka\Security\Domain\Expression\ExpressionFunction;
-use Dgafka\Security\Domain\Expression\ExpressionReader;
+use Dgafka\AuthorizationSecurity\Application\Helper\DIContainer;
+use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionFunction;
+use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionReader;
 use SebastianBergmann\GlobalState\RuntimeException;
 
 /**
  * Class Core - The core of application
  *
- * @package Dgafka\Security\Application
+ * @package Dgafka\AuthorizationSecurity\Application
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 final class Core

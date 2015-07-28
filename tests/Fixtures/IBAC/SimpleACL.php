@@ -2,8 +2,8 @@
 
 namespace Dgafka\Fixtures\IBAC;
 
-use Dgafka\Security\Domain\Resource\StandardResource;
-use Dgafka\Security\Domain\User\Identity\IdentityUser;
+use Dgafka\AuthorizationSecurity\Domain\Resource\StandardResource;
+use Dgafka\AuthorizationSecurity\Domain\User\Identity\IdentityUser;
 
 class SimpleACL
 {

@@ -1,17 +1,17 @@
 <?php
 
-namespace Dgafka\Security\Domain\Security;
+namespace Dgafka\AuthorizationSecurity\Domain\Security;
 
-use Dgafka\Security\Domain\Expression\Expression;
-use Dgafka\Security\Domain\Expression\ExpressionReader;
-use Dgafka\Security\Domain\Resource\Resource;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Domain\Expression\Expression;
+use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionReader;
+use Dgafka\AuthorizationSecurity\Domain\Resource\Resource;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Class Security - Base security type of all access controls.
  * It should throw exception of SecurityAccessDenied type, if user is not authorized correctly
  *
- * @package Dgafka\Security\Domain\Security
+ * @package Dgafka\AuthorizationSecurity\Domain\Security
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 abstract class SecurityType
@@ -26,7 +26,7 @@ abstract class SecurityType
 	 *
 	 * @param Expression                $expression
 	 * @param User                      $user
-	 * @param \Dgafka\Security\Domain\Resource\Resource|null         $resource
+	 * @param \Dgafka\AuthorizationSecurity\Domain\Resource\Resource|null         $resource
 	 * @param array|SecurityPolicy[]    $policies
 	 *
 	 * @return void

@@ -2,10 +2,10 @@
 
 namespace Dgafka\Fixtures\Policies;
 
-use Dgafka\Security\Domain\Resource\Resource;
-use Dgafka\Security\Domain\Security\SecurityPolicy;
-use Dgafka\Security\Domain\User\Lattice\LatticeUser;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Domain\Resource\Resource;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityPolicy;
+use Dgafka\AuthorizationSecurity\Domain\User\Lattice\LatticeUser;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Class UserLevelHigherThan5

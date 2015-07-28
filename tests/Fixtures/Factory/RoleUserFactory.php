@@ -3,11 +3,11 @@
 namespace Dgafka\Fixtures\Factory;
 
 
-use Dgafka\Security\Application\Helper\UserFactory;
-use Dgafka\Security\Domain\User\Role\Role;
-use Dgafka\Security\Domain\User\Role\Roles;
-use Dgafka\Security\Domain\User\Role\RoleUser;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Application\Helper\UserFactory;
+use Dgafka\AuthorizationSecurity\Domain\User\Role\Role;
+use Dgafka\AuthorizationSecurity\Domain\User\Role\Roles;
+use Dgafka\AuthorizationSecurity\Domain\User\Role\RoleUser;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Class StandardUserFactory - test class

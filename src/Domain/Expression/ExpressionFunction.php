@@ -1,11 +1,11 @@
 <?php
 
-namespace Dgafka\Security\Domain\Expression;
+namespace Dgafka\AuthorizationSecurity\Domain\Expression;
 
 /**
  * Interface ExpressionFunction - Own function added to expression language
  *
- * @package Dgafka\Security\Domain\Expression
+ * @package Dgafka\AuthorizationSecurity\Domain\Expression
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 interface ExpressionFunction

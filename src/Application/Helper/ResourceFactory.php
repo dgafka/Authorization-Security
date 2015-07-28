@@ -1,13 +1,13 @@
 <?php
 
-namespace Dgafka\Security\Application\Helper;
+namespace Dgafka\AuthorizationSecurity\Application\Helper;
 
-use Dgafka\Security\Domain\Resource\Resource;
+use Dgafka\AuthorizationSecurity\Domain\Resource\Resource;
 
 /**
  * Interface ResourceFactory - Responsible for creating Resources
  *
- * @package Dgafka\Security\Domain\Application\Helper
+ * @package Dgafka\AuthorizationSecurity\Domain\Application\Helper
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 abstract class ResourceFactory
@@ -19,7 +19,7 @@ abstract class ResourceFactory
 	/**
 	 * Create new BaseResource object
 	 *
-	 * @return \Dgafka\Security\Domain\Resource\Resource
+	 * @return \Dgafka\AuthorizationSecurity\Domain\Resource\Resource
 	 */
 	public abstract function create();
 

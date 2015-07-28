@@ -2,12 +2,12 @@
 
 namespace Dgafka\Fixtures\IBAC;
 
-use Dgafka\Security\Domain\Expression\Expression;
-use Dgafka\Security\Domain\Resource\Resource;
-use Dgafka\Security\Domain\Security\SecurityAccessDenied;
-use Dgafka\Security\Domain\Security\SecurityPolicy;
-use Dgafka\Security\Domain\Security\SecurityType;
-use Dgafka\Security\Domain\User\User;
+use Dgafka\AuthorizationSecurity\Domain\Expression\Expression;
+use Dgafka\AuthorizationSecurity\Domain\Resource\Resource;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityPolicy;
+use Dgafka\AuthorizationSecurity\Domain\Security\SecurityType;
+use Dgafka\AuthorizationSecurity\Domain\User\User;
 
 /**
  * Class IBACSecurity
@@ -35,7 +35,7 @@ class IBACSecurity extends SecurityType
 	 *
 	 * @param Expression             $expression
 	 * @param User                   $user
-	 * @param \Dgafka\Security\Domain\Resource\Resource|null      $resource
+	 * @param \Dgafka\AuthorizationSecurity\Domain\Resource\Resource|null      $resource
 	 * @param array|SecurityPolicy[] $policies
 	 *
 	 * @return void

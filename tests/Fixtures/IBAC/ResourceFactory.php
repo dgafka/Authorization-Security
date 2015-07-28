@@ -3,9 +3,9 @@
 namespace Dgafka\Fixtures\IBAC;
 
 
-use Dgafka\Security\Domain\Resource\StandardResource;
+use Dgafka\AuthorizationSecurity\Domain\Resource\StandardResource;
 
-class ResourceFactory extends \Dgafka\Security\Application\Helper\ResourceFactory
+class ResourceFactory extends \Dgafka\AuthorizationSecurity\Application\Helper\ResourceFactory
 {
 
 	private $id;
@@ -18,7 +18,7 @@ class ResourceFactory extends \Dgafka\Security\Application\Helper\ResourceFactor
 	/**
 	 * Create new BaseResource object
 	 *
-	 * @return \Dgafka\Security\Domain\Resource\Resource
+	 * @return \Dgafka\AuthorizationSecurity\Domain\Resource\Resource
 	 */
 	public function create()
 	{

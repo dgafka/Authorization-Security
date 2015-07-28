@@ -1,11 +1,11 @@
 <?php
 
-namespace Dgafka\Security\Application;
+namespace Dgafka\AuthorizationSecurity\Application;
 
 /**
  * Class CoreConfig
  *
- * @package Dgafka\Security\Application
+ * @package Dgafka\AuthorizationSecurity\Application
  * @author Dariusz Gafka <dgafka.mail@gmail.com>
  */
 class CoreConfig
