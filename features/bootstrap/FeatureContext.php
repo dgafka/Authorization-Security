@@ -21,9 +21,6 @@ class FeatureContext implements Context, SnippetAcceptingContext
     /** @var  string name of the security */
     private $securityName;
 
-    /** @var  \Dgafka\AuthorizationSecurity\Application\Api\Security */
-    private $securityAPI;
-
     /** @var  \Dgafka\AuthorizationSecurity\Application\Core */
     private $applicationCore;
 
@@ -92,7 +89,6 @@ class FeatureContext implements Context, SnippetAcceptingContext
 
 
         $this->applicationCore = new \Dgafka\AuthorizationSecurity\Application\Core(new \Dgafka\AuthorizationSecurity\Application\CoreConfig(array(\org\bovigo\vfs\vfsStream::url('home')), \org\bovigo\vfs\vfsStream::url('home/cache'), true));
-        $this->securityAPI  = new \Dgafka\AuthorizationSecurity\Application\Api\Security($this->container);
 
         switch($securityName) {
             case 'role':
@@ -164,7 +160,8 @@ class FeatureContext implements Context, SnippetAcceptingContext
         });
 
         try {
-            $this->securityAPI->authorize($this->securityName, $expression, $this->securityName);
+            $securityAPI = $this->container->get('security');
+            $securityAPI->authorize($this->securityName, $expression, $this->securityName);
             $this->securityCheckResult = 1;
         }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
             $this->securityCheckResult = 0;
@@ -182,7 +179,8 @@ class FeatureContext implements Context, SnippetAcceptingContext
         $policies = explode(',', $policies);
 
         try {
-            $this->securityAPI->authorize($this->securityName, $expression, $this->securityName, null, $policies);
+            $securityAPI = $this->container->get('security');
+            $securityAPI->authorize($this->securityName, $expression, $this->securityName, null, $policies);
             $this->securityCheckResult = 1;
         }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
             $this->securityCheckResult = 0;
@@ -199,7 +197,8 @@ class FeatureContext implements Context, SnippetAcceptingContext
         });
 
         try {
-            $this->securityAPI->authorize($this->securityName, null, $this->securityName, $this->securityName, array());
+            $securityAPI = $this->container->get('security');
+            $securityAPI->authorize($this->securityName, null, $this->securityName, $this->securityName, array());
             $this->securityCheckResult = 1;
         }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
             $this->securityCheckResult = 0;

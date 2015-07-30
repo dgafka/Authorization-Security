@@ -2,6 +2,7 @@
 
 namespace Dgafka\AuthorizationSecurity\Application;
 
+use Dgafka\AuthorizationSecurity\Application\Api\Security;
 use Dgafka\AuthorizationSecurity\Application\Helper\DIContainer;
 use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionFunction;
 use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionReader;
@@ -121,6 +122,8 @@ final class Core
 		}
 
 		$container->register('expressionReader', $expressionReader);
+		$container->register('security', new Security($container));
+
 		$container->registerSecurityType('standard', $standardSecurity);
 
 		foreach($this->expressionFunctions as $expressionFunction) {
