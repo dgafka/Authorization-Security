@@ -57,7 +57,7 @@ interface DIContainer
 
 	/**
 	 * @param string $name
-	 * @param object $object
+	 * @param mixed  $object
 	 *
 	 * @return void
 	 */

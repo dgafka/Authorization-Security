@@ -15,7 +15,8 @@
         "php": ">=5.4.0",
         "symfony/expression-language": "2.7.*",
         "pimple/pimple": "3.0.*",
-        "goaop/framework": "0.6.1"
+        "goaop/framework": "0.6.1",
+        "doctrine/cache": "1.*"
     },
     "require-dev": {
         "phpspec/phpspec" : "2.2.*",
@@ -30,7 +31,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Dgafka\\Fixtures\\": "tests/Fixtures"
+            "Dgafka\\Fixtures\\": "tests/Fixtures",
+            "Dgafka\\Examples\\": "tests/Examples"
         }
     },
     "config": {

@@ -6,6 +6,7 @@ use Dgafka\AuthorizationSecurity\Application\Api\Security;
 use Dgafka\AuthorizationSecurity\Application\Helper\DIContainer;
 use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionFunction;
 use Dgafka\AuthorizationSecurity\Domain\Expression\ExpressionReader;
+use Dgafka\AuthorizationSecurity\Domain\Security\Type\StandardSecurity;
 use SebastianBergmann\GlobalState\RuntimeException;
 
 /**
@@ -19,6 +20,9 @@ final class Core
 
 	/** @var  CoreConfig */
 	private $config;
+
+    /** @var bool - Tells, if init function was called already */
+    private $isLoaded = false;
 
 	/** @var array  */
 	private $expressionFunctions = array();
@@ -110,21 +114,26 @@ final class Core
 	 *
 	 * @param DIContainer      $container
 	 * @param ExpressionReader $expressionReader
-	 * @param \Closure         $standardSecurity
 	 *
+     * @throws RuntimeException
 	 * @internal
 	 */
-	public function initialize(DIContainer $container, ExpressionReader $expressionReader, \Closure $standardSecurity)
+	public function initialize(DIContainer $container, ExpressionReader $expressionReader)
 	{
 
-		if(!isset($this->config)) {
-			throw new RuntimeException("CoreConfig must be passed to Core, in order to finish initialization.");
-		}
+        if($this->isLoaded) {
+            return;
+        }
 
 		$container->register('expressionReader', $expressionReader);
 		$container->register('security', new Security($container));
+		$container->registerSecurityType('standard', function() {
+            return new StandardSecurity();
+        });
 
-		$container->registerSecurityType('standard', $standardSecurity);
+        $container->register('cachePath', $this->config()->cachePath());
+        $container->register('debugMode', $this->config()->debugMode());
+        $container->register('includePaths', $this->config()->includePaths());
 
 		foreach($this->expressionFunctions as $expressionFunction) {
 			$expressionReader->registerFunction($expressionFunction);
@@ -146,6 +155,7 @@ final class Core
 			$container->registerResourceFactory($resourceFactory['name'], $resourceFactory['closure']);
 		}
 
+        $this->isLoaded = true;
 	}
 
 }

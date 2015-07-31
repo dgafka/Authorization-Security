@@ -2,7 +2,7 @@
 
 namespace Dgafka\AuthorizationSecurity\UI\Annotation;
 
-
+use Dgafka\AuthorizationSecurity\UI\Annotation\Aspect\AuthorizationSecurityAspect;
 use Go\Core\AspectContainer;
 use Go\Core\AspectKernel;
 
@@ -18,7 +18,7 @@ class Kernel extends AspectKernel
 	 */
 	protected function configureAop(AspectContainer $container)
 	{
-//		$container
+        $container->registerAspect(new AuthorizationSecurityAspect());
 	}
 
 }

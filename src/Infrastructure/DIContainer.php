@@ -140,7 +140,7 @@ class DIContainer implements \Dgafka\AuthorizationSecurity\Application\Helper\DI
 
 	/**
 	 * @param string $name
-	 * @param object $object
+	 * @param mixed  $object
 	 *
 	 * @throws DependencyException
 	 */

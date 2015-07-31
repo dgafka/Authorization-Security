@@ -21,7 +21,7 @@ class CoreConfig
 	private $debugMode;
 
 	/**
-	 * @param array  $includePaths Array of paths, where Security will be applied. Example: array(__DIR__ . '/src/')
+	 * @param array  $includePaths Array of paths, where Security will be applied. Example: array(__DIR__ . '/src')
 	 * @param string $cachePath Path to folder where all cached files will be stored.
 	 * @param bool   $debugMode True - on development, False - on production
 	 */
