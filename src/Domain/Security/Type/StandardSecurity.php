@@ -24,15 +24,25 @@ class StandardSecurity extends SecurityType
 	public function execute(Expression $expression, User $user, Resource $resource = null, array $policies = array())
 	{
 		if(!$this->expressionReader->evaluate($expression, ['user' => $user, 'resource' => $resource])) {
-			throw new SecurityAccessDenied("User: {$user->id()} have no access to this resource.");
+			$this->userHasNoAccess($user);
 		};
 
 		/** @var SecurityPolicy $securityPolicy */
 		foreach($policies as $securityPolicy) {
 			if(!$securityPolicy->execute($user, $resource)) {
-				throw new SecurityAccessDenied("User: {$user->id()} have no access to this resource.");
+				$this->userHasNoAccess($user);
 			};
 		}
+	}
+
+	/**
+	 * @param User $user
+	 *
+	 * @throws SecurityAccessDenied
+	 */
+	private function userHasNoAccess(User $user)
+	{
+		throw new SecurityAccessDenied("User of id {$user->id()} have no access to this resource.");
 	}
 
 }

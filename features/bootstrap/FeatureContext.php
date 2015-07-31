@@ -161,7 +161,9 @@ class FeatureContext implements Context, SnippetAcceptingContext
 
         try {
             $securityAPI = $this->container->get('security');
-            $securityAPI->authorize($this->securityName, $expression, $this->securityName);
+
+            $securityCommand = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand($this->securityName, $expression, $this->securityName, null);
+            $securityAPI->authorize($securityCommand);
             $this->securityCheckResult = 1;
         }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
             $this->securityCheckResult = 0;
@@ -180,7 +182,9 @@ class FeatureContext implements Context, SnippetAcceptingContext
 
         try {
             $securityAPI = $this->container->get('security');
-            $securityAPI->authorize($this->securityName, $expression, $this->securityName, null, $policies);
+
+            $securityCommand = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand($this->securityName, $expression, $this->securityName, null, $policies);
+            $securityAPI->authorize($securityCommand);
             $this->securityCheckResult = 1;
         }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
             $this->securityCheckResult = 0;
@@ -198,7 +202,9 @@ class FeatureContext implements Context, SnippetAcceptingContext
 
         try {
             $securityAPI = $this->container->get('security');
-            $securityAPI->authorize($this->securityName, null, $this->securityName, $this->securityName, array());
+
+            $securityCommand = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand($this->securityName, null, $this->securityName, $this->securityName);
+            $securityAPI->authorize($securityCommand);
             $this->securityCheckResult = 1;
         }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
             $this->securityCheckResult = 0;

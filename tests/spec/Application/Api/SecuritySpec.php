@@ -3,6 +3,7 @@
 namespace spec\Dgafka\AuthorizationSecurity\Application\Api;
 
 use Dgafka\AuthorizationSecurity\Application\Api\Security;
+use Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand;
 use Dgafka\AuthorizationSecurity\Application\Helper\DIContainer;
 use Dgafka\AuthorizationSecurity\Application\Helper\ResourceFactory;
 use Dgafka\AuthorizationSecurity\Application\Helper\UserFactory;
@@ -40,7 +41,7 @@ class SecuritySpec extends ObjectBehavior
         $this->shouldHaveType('Dgafka\AuthorizationSecurity\Application\Api\Security');
     }
 
-    public function it_should_run_security_without_policies(SecurityType $security, UserFactory $userFactory, User $user, Resource $resource, ResourceFactory $resourceFactory)
+    public function it_should_run_security_without_policies(SecurityType $security, UserFactory $userFactory, User $user, Resource $resource, ResourceFactory $resourceFactory, SecurityCommand $securityCommand)
     {
         $this->container->getUserFactory('simple_user_factory')->willReturn($userFactory);
         $this->container->getResourceFactory('simple_resource_factory')->willReturn($resourceFactory);
@@ -51,10 +52,16 @@ class SecuritySpec extends ObjectBehavior
 
         $security->execute(Argument::type('Dgafka\AuthorizationSecurity\Domain\Expression\Expression'),  $user, $resource, array())->shouldBeCalledTimes(1);
 
-        $this->authorize('standard_security', 'user.id > 5', 'simple_user_factory', 'simple_resource_factory');
+        $securityCommand->securityType()->willReturn('standard_security');
+        $securityCommand->expression()->willReturn('user.id > 5');
+        $securityCommand->userFactory()->willReturn('simple_user_factory');
+        $securityCommand->resourceFactory()->willReturn('simple_resource_factory');
+        $securityCommand->policies()->willReturn(array());
+
+        $this->authorize($securityCommand);
     }
 
-    public function it_should_run_security_with_policies(SecurityType $security, UserFactory $userFactory, User $user, Resource $resource, ResourceFactory $resourceFactory, SecurityPolicy $securityPolicy)
+    public function it_should_run_security_with_policies(SecurityType $security, UserFactory $userFactory, User $user, Resource $resource, ResourceFactory $resourceFactory, SecurityPolicy $securityPolicy, SecurityCommand $securityCommand)
     {
         $this->container->getUserFactory('simple_user_factory')->willReturn($userFactory);
         $this->container->getResourceFactory('simple_resource_factory')->willReturn($resourceFactory);
@@ -66,10 +73,16 @@ class SecuritySpec extends ObjectBehavior
 
         $security->execute(Argument::type('Dgafka\AuthorizationSecurity\Domain\Expression\Expression'),  $user, $resource, array($securityPolicy))->shouldBeCalledTimes(1);
 
-        $this->authorize('standard_security', 'user.id > 5', 'simple_user_factory', 'simple_resource_factory', array('isLocalPolicy'));
+        $securityCommand->securityType()->willReturn('standard_security');
+        $securityCommand->expression()->willReturn('user.id > 5');
+        $securityCommand->userFactory()->willReturn('simple_user_factory');
+        $securityCommand->resourceFactory()->willReturn('simple_resource_factory');
+        $securityCommand->policies()->willReturn(array('isLocalPolicy'));
+
+        $this->authorize($securityCommand);
     }
 
-    public function it_should_run_security_when_resource_is_null(SecurityType $security, UserFactory $userFactory, User $user, SecurityPolicy $securityPolicy)
+    public function it_should_run_security_when_resource_is_null(SecurityType $security, UserFactory $userFactory, User $user, SecurityPolicy $securityPolicy, SecurityCommand $securityCommand)
     {
         $this->container->getUserFactory('simple_user_factory')->willReturn($userFactory);
         $this->container->getSecurityType('standard_security')->willReturn($security);
@@ -79,10 +92,16 @@ class SecuritySpec extends ObjectBehavior
 
         $security->execute(Argument::type('Dgafka\AuthorizationSecurity\Domain\Expression\Expression'),  $user, null, array($securityPolicy))->shouldBeCalledTimes(1);
 
-        $this->authorize('standard_security', 'user.id > 5', 'simple_user_factory', null, array('isLocalPolicy'));
+        $securityCommand->securityType()->willReturn('standard_security');
+        $securityCommand->expression()->willReturn('user.id > 5');
+        $securityCommand->userFactory()->willReturn('simple_user_factory');
+        $securityCommand->resourceFactory()->willReturn(null);
+        $securityCommand->policies()->willReturn(array('isLocalPolicy'));
+
+        $this->authorize($securityCommand);
     }
 
-    function it_should_create_empty_expression_when_no_expression_passed(SecurityType $security, UserFactory $userFactory, User $user)
+    function it_should_create_empty_expression_when_no_expression_passed(SecurityType $security, UserFactory $userFactory, User $user, SecurityCommand $securityCommand)
     {
         $this->container->getUserFactory('simple_user_factory')->willReturn($userFactory);
         $this->container->getSecurityType('standard_security')->willReturn($security);
@@ -91,7 +110,13 @@ class SecuritySpec extends ObjectBehavior
 
         $security->execute(Argument::type('Dgafka\AuthorizationSecurity\Domain\Expression\EmptyExpression'),  $user, null, array())->shouldBeCalledTimes(1);
 
-        $this->authorize('standard_security', null, 'simple_user_factory', null);
+        $securityCommand->securityType()->willReturn('standard_security');
+        $securityCommand->expression()->willReturn(null);
+        $securityCommand->userFactory()->willReturn('simple_user_factory');
+        $securityCommand->resourceFactory()->willReturn(null);
+        $securityCommand->policies()->willReturn([]);
+
+        $this->authorize($securityCommand);
     }
 
 }

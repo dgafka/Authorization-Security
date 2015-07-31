@@ -14,7 +14,7 @@ abstract class ResourceFactory
 {
 
 	/** @var  array Arguments passed from outside to help with building new resource */
-	private $arguments;
+	protected $arguments;
 
 	/**
 	 * Create new BaseResource object

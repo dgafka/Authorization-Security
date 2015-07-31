@@ -2,99 +2,13 @@
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(-1);
-require('../../vendor/autoload.php');
-
-$language = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
-
-class User
-{
-	public $age;
-
-	public function __construct($age)
-	{
-		$this->age = $age;
-	}
-
-	public function roles($roles)
-	{
-		var_dump($roles);
-	}
-
-	public function getClosure()
-	{
-		$bla = 1;
-		$tmp = function() use ($bla) {
-			return $bla;
-		};
-
-		return $tmp;
-	}
-
-}
-
-$user = new User(11);
-//$rfl = new \ReflectionClass($user);
-//$property = $rfl->getProperty('age');
-//$property->setAccessible(true);
-
-
-//var_dump(
-//	$language->evaluate("user.age in [10, 20]", [ 'user' => $user ])
-//);
-
-$closure = $user->getClosure();
-
-
-//use Symfony\Component\ExpressionLanguage\ExpressionFunction;
-//use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
-//
-//class StringExpressionLanguageProvider implements ExpressionFunctionProviderInterface
-//{
-//	public function getFunctions()
-//	{
-//		return array(
-//			new ExpressionFunction('lowercase', null, function ($arguments, $str, $test, $bla) {
-//				var_dump($str);
-////				if (!is_string($str)) {
-////					return $str;
-////				}
-////
-////				return strtolower($str);
-//			}),
-//		);
-//	}
-//}
-
-//$language = new \Symfony\Component\DependencyInjection\ExpressionLanguage(null, array(
-//	new StringExpressionLanguageProvider()
-//));
-
-//$language->register('lowercase', null, function($arguments, $str) {
-//
-//	$args = func_get_args();
-//	array_shift($args);
-//
-//	$function = function ($arguments) {
-//
-//		if (!is_string($arguments[1])) {
-//			return $arguments[1];
-//		}
-//
-//		return strtolower($arguments[1]);
-//	};
-//
-//	return $function($args);
-//});
-
-//var_dump($language->evaluate('lowercase({"test" : "HELLO"}, "TEST", "blabla")'));
-
-
+require(__DIR__ . '/../../vendor/autoload.php');
 
 use Dgafka\AuthorizationSecurity\Application\Core;
 use Dgafka\AuthorizationSecurity\Application\CoreConfig;
 use Dgafka\AuthorizationSecurity\UI\Annotation\AnnotationSecurity;
 
-
+//Initialization
 
 $core = new Core(new CoreConfig(array(
     __DIR__,
@@ -104,16 +18,87 @@ $core->registerUserFactory('roleUserFactory', function(){
     return new \Dgafka\Fixtures\Factory\RoleUserFactory(1, ['test']);
 });
 
+$core->registerUserFactory('identityUserFactory', function(){
+	return new \Dgafka\Fixtures\IBAC\IdentityUserFactory(10);
+});
+
+$core->registerResourceFactory('resourceFactory', function(){
+	return new \Dgafka\Fixtures\IBAC\ExampleResourceFactory();
+});
+
+$core->registerSecurityType('ibac', function(){
+	return new \Dgafka\Fixtures\IBAC\IBACSecurity(new \Dgafka\Fixtures\IBAC\SimpleACL(['10' => [10, 12]]));
+});
+
+$core->registerSecurityPolicy('isLocalHost', function(){
+	return new \Dgafka\Fixtures\Policies\IsLocalHost();
+});
+
+$core->registerSecurityPolicy('isMonday', function(){
+	return new \Dgafka\Fixtures\Policies\IsMonday();
+});
+
 $annotationSecurity = AnnotationSecurity::getInstance();
 $annotationSecurity->init($core);
 
+
+
+
+
+
+
+//Tests
+
+
+
 echo "\nFirst Example:\n";
-$basicUsage = new \Dgafka\Examples\BasicUsage;
-$basicUsage->doIt();
+$example = new \Dgafka\Examples\BasicUsage;
+$example->doIt();
 
 
 echo "\nSecond Example:\n";
-$expression = new \Dgafka\Examples\TestExpression();
-$expression->tellMeWhy();
+$example = new \Dgafka\Examples\TestExpression();
 
-//$expression->test();
+$shouldCatchException = false;
+try {
+	$example->tellMeWhy();
+}catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
+	$shouldCatchException = true;
+}
+PHPUnit_Framework_Assert::assertEquals(true, $shouldCatchException);
+
+$example->test();
+
+
+echo "\nThird Example\n";
+$example = new \Dgafka\Examples\TestSecurityType();
+
+$command = new stdClass();
+$command->resourceId = 10;
+$example->test($command);
+
+$command = new stdClass();
+$command->resourceId = 13;
+
+$shouldCatchException = false;
+try {
+	$example->test($command);
+}catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
+	$shouldCatchException = true;
+}
+PHPUnit_Framework_Assert::assertEquals(true, $shouldCatchException);
+
+
+echo "\nFourth Example\n";
+
+$example = new \Dgafka\Examples\TestPolicies();
+
+$shouldCatchException = false;
+try {
+	$example->test($command);
+}catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
+	$shouldCatchException = true;
+}
+PHPUnit_Framework_Assert::assertEquals(true, $shouldCatchException);
+
+$example->test2();

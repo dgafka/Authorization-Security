@@ -43,13 +43,6 @@ class AnnotationSecurity
     {
         require(__DIR__ . '/Type/AuthorizationSecurity.php');
         AnnotationRegistry::registerAutoloadNamespace('\Dgafka\AuthorizationSecurity\UI\Annotation\Type', __DIR__ . '/Type');
-        $diContainer = DIContainer::getInstance();
-
-        $diContainer->register('annotationReader', new CachedReader(
-            new AnnotationReader(),
-            new FilesystemCache($core->config()->cachePath() . '/annotations'),
-            $core->config()->debugMode()
-        ));
 
         $expressionReader = new ExpressionReader(new ExpressionLanguage(
             $core->config()->debugMode() ? null : new ExpressionLanguageCache(new FilesystemCache($core->config()->cachePath() . '/expressions'))

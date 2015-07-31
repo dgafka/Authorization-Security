@@ -3,9 +3,14 @@
 namespace Dgafka\AuthorizationSecurity\UI\Annotation\Aspect;
 
 use Dgafka\AuthorizationSecurity\Application\Api\Security;
+use Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand;
+use Dgafka\AuthorizationSecurity\Application\Helper\ResourceFactory;
+use Dgafka\AuthorizationSecurity\Application\Helper\UserFactory;
 use Dgafka\AuthorizationSecurity\Infrastructure\DIContainer;
+use Dgafka\AuthorizationSecurity\UI\Annotation\Type\AuthorizationResourceFactory;
 use Dgafka\AuthorizationSecurity\UI\Annotation\Type\AuthorizationSecurity;
 use Dgafka\AuthorizationSecurity\UI\Annotation\Type\AuthorizationExpression;
+use Dgafka\AuthorizationSecurity\UI\Annotation\Type\AuthorizationPolicy;
 use Go\Aop\Aspect;
 use Go\Aop\Intercept\MethodInvocation;
 use Go\Lang\Annotation\Around;
@@ -34,23 +39,28 @@ class AuthorizationSecurityAspect implements Aspect
 	public function authorize(MethodInvocation $invocation)
 	{
         $rflMethod = $invocation->getMethod();
-        $security  = new \stdClass();
-        $security->type        = null;
-        $security->userFactory = null;
-        $security->expression  = null;
-        $security->resourceFactory = null;
-        $security->policies    = array();
+        $type        = null;
+        $userFactory = null;
+        $expression  = null;
+        $resourceFactory = null;
+        $policies    = array();
 
         foreach($rflMethod->getAnnotations() as $annotation) {
 
             switch($annotation) {
 
                 case ($annotation instanceof AuthorizationSecurity):
-                    $security->type = $annotation->securityTypeName();
-                    $security->userFactory = $annotation->userFactoryName();
+                    $type = $annotation->securityTypeName();
+                    $userFactory = $annotation->userFactoryName();
                     break;
                 case ($annotation instanceof AuthorizationExpression):
-                    $security->expression = $annotation->expression();
+                    $expression = $annotation->expression();
+                    break;
+                case ($annotation instanceof AuthorizationResourceFactory):
+                    $resourceFactory = $annotation->resourceFactoryName();
+                    break;
+                case ($annotation instanceof AuthorizationPolicy):
+                    $policies[] = $annotation->policyName();
                     break;
             }
 
@@ -59,8 +69,15 @@ class AuthorizationSecurityAspect implements Aspect
         /** @var Security $securityAPI */
         $securityAPI = DIContainer::getInstance()->get('security');
 
-        $securityAPI->authorize($security->type, $security->expression, $security->userFactory, $security->resourceFactory, $security->policies);
+        if(!is_null($resourceFactory)) {
+            /** @var ResourceFactory $userFactory */
+            $resourceFactoryForArguments = DIContainer::getInstance()->getResourceFactory($resourceFactory);
+            $resourceFactoryForArguments->setParameters($invocation->getArguments());
+        }
 
+        $securityCommand = new SecurityCommand($type, $expression, $userFactory, $resourceFactory, $policies);
+        $securityAPI->authorize($securityCommand);
+        $invocation->proceed();
     }
 
 }

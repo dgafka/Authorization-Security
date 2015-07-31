@@ -25,15 +25,15 @@ class AuthorizationSecurity
     {
 
         if(!isset($values['type'])) {
-            throw new \RuntimeException("Pass 'type' of security to AuthorizationSecurity annotation.");
+            throw new \RuntimeException("Pass 'type' of security to AuthorizationSecurity annotation. Example usage: @AuthorizationSecurity(type=\"standard\", userFactory=\"roleUserFactory\") ");
         }
 
         if(!isset($values['userFactory'])) {
-            throw new \RuntimeException("Pass 'userFactory' to AuthrizationSecurity annotation.");
+            throw new \RuntimeException("Pass 'userFactory' to AuthrizationSecurity annotation. Example usage: @AuthorizationSecurity(type=\"standard\", userFactory=\"roleUserFactory\") ");
         }
 
-        $this->securityTypeName = $values['type'];
-        $this->userFactoryName  = $values['userFactory'];
+        $this->securityTypeName = trim($values['type']);
+        $this->userFactoryName  = trim($values['userFactory']);
     }
 
 

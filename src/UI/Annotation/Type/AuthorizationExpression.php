@@ -22,10 +22,10 @@ class AuthorizationExpression
     public function __construct(array $values)
     {
         if(!isset($values['value'])) {
-            throw new \RuntimeException("Pass expression to AuthorizationExpression annotation");
+            throw new \RuntimeException("Pass expression to AuthorizationExpression annotation. Example usage: @AuthorizationExpression(\" user.hasRole('moderator') \") ");
         }
 
-        $this->expression = $values['value'];
+        $this->expression = trim($values['value']);
     }
 
     /**

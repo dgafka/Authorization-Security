@@ -32,33 +32,30 @@ class Security
 	/**
 	 * Runs security to check, if user is authorized correctly
 	 *
-	 * @param string $securityType
-	 * @param string $expression
-	 * @param string $userFactory
-	 * @param null   $resourceFactory
-	 * @param array  $policies
+	 * @param SecurityCommand $securityCommand
+	 *
 	 */
-	public function authorize($securityType, $expression, $userFactory, $resourceFactory = null, array $policies = array())
+	public function authorize(SecurityCommand $securityCommand)
 	{
 		/** @var UserFactory $userFactory */
-		$userFactory = $this->container->getUserFactory($userFactory);
+		$userFactory = $this->container->getUserFactory($securityCommand->userFactory());
 		$user = $userFactory->create();
 
 		/** @var ResourceFactory $resourceFactory */
-		if (!is_null($resourceFactory)) {
-			$resourceFactory = $this->container->getResourceFactory($resourceFactory);
+		if (!is_null($securityCommand->resourceFactory())) {
+			$resourceFactory = $this->container->getResourceFactory($securityCommand->resourceFactory());
 			$resource = $resourceFactory->create();
 		}
 
 		/** @var SecurityType $securityType */
-		$securityType = $this->container->getSecurityType($securityType);
+		$securityType = $this->container->getSecurityType($securityCommand->securityType());
 
 		$policiesList = array();
-		foreach ($policies as $policy) {
+		foreach ($securityCommand->policies() as $policy) {
 			$policiesList[] = $this->container->getSecurityPolicy($policy);
 		}
 
-		$expression = $expression ? new Expression($expression) : new EmptyExpression();
+		$expression = $securityCommand->expression() ? new Expression($securityCommand->expression()) : new EmptyExpression();
 		$securityType->execute($expression, $user, (isset($resource) ? $resource : null), $policiesList);
 
 	}
