@@ -41,7 +41,6 @@ class AnnotationSecurity
      */
     public function init(Core $core)
     {
-        require(__DIR__ . '/Type/AuthorizationSecurity.php');
         AnnotationRegistry::registerAutoloadNamespace('\Dgafka\AuthorizationSecurity\UI\Annotation\Type', __DIR__ . '/Type');
 
         $expressionReader = new ExpressionReader(new ExpressionLanguage(

@@ -102,3 +102,16 @@ try {
 PHPUnit_Framework_Assert::assertEquals(true, $shouldCatchException);
 
 $example->test2();
+
+
+
+//Basic Security
+
+$basicSecurity = \Dgafka\AuthorizationSecurity\UI\Basic\BasicSecurity::getInstance();
+$basicSecurity->init($core);
+
+$command = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand('standard', 'user.id == 4', 'roleUserFactory');
+PHPUnit_Framework_Assert::assertEquals(false, $basicSecurity->isAuthorized($command));
+
+$command = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand('standard', 'user.id == 1', 'roleUserFactory');
+PHPUnit_Framework_Assert::assertEquals(true, $basicSecurity->isAuthorized($command));
