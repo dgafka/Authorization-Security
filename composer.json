@@ -22,7 +22,8 @@
         "phpspec/phpspec" : "2.2.*",
         "behat/behat" : "3.0.*",
         "phpunit/phpunit" : "4.7.*",
-        "mikey179/vfsStream": "~1.5.0"
+        "mikey179/vfsStream": "~1.5.0",
+        "symfony/filesystem": "2.7.*"
     },
     "autoload": {
         "psr-4": {
