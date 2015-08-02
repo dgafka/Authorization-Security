@@ -22,6 +22,6 @@ Example usage of security:
 
 >Add Annotation Security as dependency
 
-        require: {
+        "require": {
             "dgafka/authorization-security": "*"
         }
