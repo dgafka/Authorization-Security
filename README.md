@@ -1,5 +1,7 @@
 ## Authorization Security
 
+![Travis badge](https://travis-ci.org/dgafka/Authorization-Security.svg?branch=master)
+
 Authorization Security provides powerful open for extending library. 
 The main idea behind it, is to provide easy to read, clean way of securing your applications.
 
