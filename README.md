@@ -18,3 +18,10 @@ Example usage of security:
 
 >Read Authorization Security Wiki to get known with library
 [Read Here](https://github.com/dgafka/Authorization-Security/wiki/1.-About)
+
+
+>Add Annotation Security as dependency
+
+        require: {
+            "dgafka/authorization-security": "*"
+        }
