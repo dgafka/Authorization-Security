@@ -110,8 +110,8 @@ $example->test2();
 $basicSecurity = \Dgafka\AuthorizationSecurity\UI\Basic\BasicSecurity::getInstance();
 $basicSecurity->init($core);
 
-$command = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand('standard', 'user.id == 4', 'roleUserFactory');
+$command = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand('standard', 'roleUserFactory', 'user.id == 4');
 PHPUnit_Framework_Assert::assertEquals(false, $basicSecurity->isAuthorized($command));
 
-$command = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand('standard', 'user.id == 1', 'roleUserFactory');
+$command = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand('standard', 'roleUserFactory', 'user.id == 1');
 PHPUnit_Framework_Assert::assertEquals(true, $basicSecurity->isAuthorized($command));

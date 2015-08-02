@@ -16,7 +16,7 @@ class TestSecurityType
 
 	/**
 	 * @AuthorizationSecurity(type="ibac", userFactory="identityUserFactory")
-	 * @AuthorizationResourceFactory("resourceFactory")
+	 * @AuthorizationResourceFactory("resourceFactory", parameters={"test"})
 	 *
 	 */
 	public function test($command)

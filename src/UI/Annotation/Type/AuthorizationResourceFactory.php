@@ -19,6 +19,9 @@ class AuthorizationResourceFactory
 	/** @var  string */
 	private $resourceFactoryName;
 
+	/** @var mixed */
+	private $additionalParameters;
+
 	/**
 	 * @param array $values
 	 */
@@ -28,7 +31,8 @@ class AuthorizationResourceFactory
 			throw new \RuntimeException("Pass expression to AuthorizationExpression annotation. Example usage: @AuthorizationResourceFactory(\"resourceFactory\") ");
 		}
 
-		$this->resourceFactoryName = trim($values['value']);
+		$this->resourceFactoryName  = trim($values['value']);
+		$this->additionalParameters = isset($values['parameters']) ? $values['parameters'] : null;
 	}
 
 	/**
@@ -37,6 +41,14 @@ class AuthorizationResourceFactory
 	public function resourceFactoryName()
 	{
 		return $this->resourceFactoryName;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function additionalParameters()
+	{
+		return $this->additionalParameters;
 	}
 
 }

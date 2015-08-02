@@ -14,7 +14,7 @@ class SecurityCommand
 	/** @var  string */
 	private $securityType;
 
-	/** @var  string */
+	/** @var  string|null */
 	private $expression;
 
 	/** @var  string */
@@ -28,12 +28,12 @@ class SecurityCommand
 
 	/**
 	 * @param string $securityType
-	 * @param string|null $expression
 	 * @param string $userFactory
+	 * @param string|null $expression
 	 * @param string|null   $resourceFactory
 	 * @param array  $policies
 	 */
-	public function __construct($securityType, $expression, $userFactory, $resourceFactory = null, array $policies = array())
+	public function __construct($securityType, $userFactory, $expression = null, $resourceFactory = null, array $policies = array())
 	{
 		$this->securityType = $securityType;
 		$this->expression   = $expression;

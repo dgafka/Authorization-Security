@@ -162,7 +162,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
         try {
             $securityAPI = $this->container->get('security');
 
-            $securityCommand = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand($this->securityName, $expression, $this->securityName, null);
+            $securityCommand = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand($this->securityName, $this->securityName, $expression, null);
             $securityAPI->authorize($securityCommand);
             $this->securityCheckResult = 1;
         }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
@@ -183,7 +183,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
         try {
             $securityAPI = $this->container->get('security');
 
-            $securityCommand = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand($this->securityName, $expression, $this->securityName, null, $policies);
+            $securityCommand = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand($this->securityName, $this->securityName, $expression, null, $policies);
             $securityAPI->authorize($securityCommand);
             $this->securityCheckResult = 1;
         }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {
@@ -203,7 +203,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
         try {
             $securityAPI = $this->container->get('security');
 
-            $securityCommand = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand($this->securityName, null, $this->securityName, $this->securityName);
+            $securityCommand = new \Dgafka\AuthorizationSecurity\Application\Api\SecurityCommand($this->securityName, $this->securityName, null, $this->securityName);
             $securityAPI->authorize($securityCommand);
             $this->securityCheckResult = 1;
         }catch (\Dgafka\AuthorizationSecurity\Domain\Security\SecurityAccessDenied $e) {

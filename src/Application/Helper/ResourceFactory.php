@@ -13,11 +13,14 @@ use Dgafka\AuthorizationSecurity\Domain\Resource\Resource;
 abstract class ResourceFactory
 {
 
-	/** @var  array Arguments passed from outside to help with building new resource */
+	/** @var  array Arguments passed from outside function to help with building new resource */
 	protected $arguments;
 
+	/** @var  mixed parameters passed by annotation */
+	protected $additionalParameters;
+
 	/**
-	 * Create new BaseResource object
+	 * Creates new Resource object
 	 *
 	 * @return \Dgafka\AuthorizationSecurity\Domain\Resource\Resource
 	 */
@@ -30,9 +33,18 @@ abstract class ResourceFactory
 	 * @param array $arguments
 	 * @internal
 	 */
-	final public function setParameters(array $arguments = array())
+	final public function setArguments(array $arguments = array())
 	{
 		$this->arguments = $arguments;
+	}
+
+	/**
+	 * @param mixed $additionalParameters
+	 * @internal
+	 */
+	final public function setAdditionalParameters($additionalParameters)
+	{
+		$this->additionalParameters = $additionalParameters;
 	}
 
 }

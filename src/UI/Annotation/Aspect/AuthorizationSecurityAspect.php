@@ -43,6 +43,7 @@ class AuthorizationSecurityAspect implements Aspect
         $userFactory = null;
         $expression  = null;
         $resourceFactory = null;
+        $resourceFactoryAdditionalParameters = null;
         $policies    = array();
 
         foreach($rflMethod->getAnnotations() as $annotation) {
@@ -58,6 +59,7 @@ class AuthorizationSecurityAspect implements Aspect
                     break;
                 case ($annotation instanceof AuthorizationResourceFactory):
                     $resourceFactory = $annotation->resourceFactoryName();
+                    $resourceFactoryAdditionalParameters = $annotation->additionalParameters();
                     break;
                 case ($annotation instanceof AuthorizationPolicy):
                     $policies[] = $annotation->policyName();
@@ -72,10 +74,11 @@ class AuthorizationSecurityAspect implements Aspect
         if(!is_null($resourceFactory)) {
             /** @var ResourceFactory $userFactory */
             $resourceFactoryForArguments = DIContainer::getInstance()->getResourceFactory($resourceFactory);
-            $resourceFactoryForArguments->setParameters($invocation->getArguments());
+            $resourceFactoryForArguments->setArguments($invocation->getArguments());
+            $resourceFactoryForArguments->setAdditionalParameters($resourceFactoryAdditionalParameters);
         }
 
-        $securityCommand = new SecurityCommand($type, $expression, $userFactory, $resourceFactory, $policies);
+        $securityCommand = new SecurityCommand($type, $userFactory, $expression, $resourceFactory, $policies);
         $securityAPI->authorize($securityCommand);
         $invocation->proceed();
     }
